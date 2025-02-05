@@ -1,14 +1,32 @@
-// components/Header.js
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { FiMenu } from "react-icons/fi";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  // Observer des sections visibles dans le viewport
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id); // Récupérer l'ID de la section visible
+        }
+      });
+    }, { threshold: 0.5 }); // 50% de la section visible
+
+    const sections = document.querySelectorAll("section");
+    sections.forEach((section) => observer.observe(section));
+
+    return () => {
+      sections.forEach((section) => observer.unobserve(section));
+    };
+  }, []);
 
   // Fermer le menu en cliquant à l'extérieur
   useEffect(() => {
@@ -56,15 +74,13 @@ const Header = () => {
 
       {/* Menu mobile avec effet de glissement du haut vers le bas */}
       <div
-        className={`fixed top-0 left-0 w-full bg-black/80 backdrop-blur-lg transform transition-transform duration-300 ease-in-out z-50 mobile-menu ${
-          isMenuOpen ? "translate-y-0" : "-translate-y-full"
-        } md:hidden`}
+        className={`fixed top-0 left-0 w-full bg-black/80 backdrop-blur-lg transform transition-transform duration-300 ease-in-out z-50 mobile-menu ${isMenuOpen ? "translate-y-0" : "-translate-y-full"} md:hidden`}
       >
         <nav className="mt-16 p-4 border-b border-white/10">
           <ul className="flex flex-col space-y-4">
             <li>
               <a
-                className="text-white uppercase hover:text-pink-500 block py-2 "
+                className={`text-white uppercase hover:text-pink-500 block py-2 ${activeSection === "services" ? "text-pink-500" : ""}`}
                 href="#services"
                 onClick={toggleMenu}
               >
@@ -73,7 +89,7 @@ const Header = () => {
             </li>
             <li>
               <a
-                className="text-white uppercase hover:text-pink-500 block py-2 "
+                className={`text-white uppercase hover:text-pink-500 block py-2 ${activeSection === "skills" ? "text-pink-500" : ""}`}
                 href="#skills"
                 onClick={toggleMenu}
               >
@@ -82,7 +98,7 @@ const Header = () => {
             </li>
             <li>
               <a
-                className="text-white uppercase hover:text-pink-500 block py-2 "
+                className={`text-white uppercase hover:text-pink-500 block py-2 ${activeSection === "portfolio" ? "text-pink-500" : ""}`}
                 href="#portfolio"
                 onClick={toggleMenu}
               >
@@ -91,7 +107,7 @@ const Header = () => {
             </li>
             <li>
               <a
-                className="text-white uppercase hover:text-pink-500 block py-2 "
+                className={`text-white uppercase hover:text-pink-500 block py-2 ${activeSection === "contact" ? "text-pink-500" : ""}`}
                 href="#contact"
                 onClick={toggleMenu}
               >
@@ -108,7 +124,7 @@ const Header = () => {
           <ul className="md:flex items-center justify-between text-base text-white pt-4 md:pt-0">
             <li>
               <a
-                className="md:p-4 py-3 uppercase px-0 block hover:text-pink-500"
+                className={`md:p-4 py-3 uppercase px-0 block hover:text-pink-500 ${activeSection === "services" ? "text-pink-500" : ""}`}
                 href="#services"
               >
                 Services
@@ -116,7 +132,7 @@ const Header = () => {
             </li>
             <li>
               <a
-                className="md:p-4 py-3 uppercase px-0 block hover:text-pink-500"
+                className={`md:p-4 py-3 uppercase px-0 block hover:text-pink-500 ${activeSection === "skills" ? "text-pink-500" : ""}`}
                 href="#skills"
               >
                 Technologies
@@ -124,7 +140,7 @@ const Header = () => {
             </li>
             <li>
               <a
-                className="md:p-4 py-3 uppercase px-0 block hover:text-pink-500"
+                className={`md:p-4 py-3 uppercase px-0 block hover:text-pink-500 ${activeSection === "portfolio" ? "text-pink-500" : ""}`}
                 href="#portfolio"
               >
                 Portfolio
@@ -132,7 +148,7 @@ const Header = () => {
             </li>
             <li>
               <a
-                className="md:p-4 py-3 uppercase px-0 block hover:text-pink-500 md:mb-0 mb-2"
+                className={`md:p-4 py-3 uppercase px-0 block hover:text-pink-500 md:mb-0 mb-2 ${activeSection === "contact" ? "text-pink-500" : ""}`}
                 href="#contact"
               >
                 Contact
