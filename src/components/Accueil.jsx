@@ -17,7 +17,7 @@ function Accueil() {
                                 <span className="font-merriweather">Salut🖐, je suis Youssou!</span>
                             </div>
                             {/* Titre avec animation de texte */}
-                            <div className='mt-4 h-20 flex items-center'>
+                            <div className='mt-4 h-20 flex md:justify-start justify-center items-center'>
                                 <h1 className="text-5xl">
                                     <span className="typing font-semibold bg-gradient-to-r from-rose-500 via-pink-700 to-blue-500 bg-clip-text text-transparent text-5xl font-poppins libre-baskerville-bold text-green-500 mt-2"></span>
                                 </h1>
@@ -32,9 +32,9 @@ function Accueil() {
                                     <a href="#contact"  className="p-2 px-6 text-white font-semibold rounded-full outline outline-2 outline-purple-500 hover:bg-purple-600 transition ease-in-out delay-150">
                                         Me Contacter
                                     </a>
-                                    <button className="p-2 px-6 text-white font-semibold rounded-full outline outline-2 outline-pink-500 hover:bg-pink-600 transition ease-in-out delay-150">
+                                    <a href="/cv-tra.pdf" download className="p-2 px-6 text-white font-semibold rounded-full outline outline-2 outline-pink-500 hover:bg-pink-600 transition ease-in-out delay-150">
                                         Télécharger mon CV
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
