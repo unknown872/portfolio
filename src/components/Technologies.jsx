@@ -3,6 +3,7 @@ import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt, FaNodeJs, FaNpm, FaDatabas
 import { SiTypescript, SiNextdotjs, SiTailwindcss, SiFigma, SiCanva, SiPostgresql, SiPrisma } from 'react-icons/si';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { useI18n } from '../../locales';
 
 const techIcons = [
     { icon: <FaHtml5 className="text-orange-500" />, name: "HTML" },
@@ -26,6 +27,8 @@ const techIcons = [
 ];
 
 function Technologies() {
+    const t = useI18n();
+
     useEffect(() => {
         AOS.init({ duration: 1000, once: true });
         
@@ -35,7 +38,7 @@ function Technologies() {
         <section className='py-20 bg-gradient-to-br from-20% to-80% from-blue-100 to-white' id='skills'>
             <div className='relative flex flex-col items-center justify-center mb-14 space-y-4' data-aos="fade-right">
                 <h2 className='text-3xl font-serif bg-gradient-to-r w-[20rem] from-pink-500 to-blue-500 bg-clip-text text-transparent font-bold text-center uppercase'>Skills</h2>
-                <p className="text-center text-gray-700 dark:text-gray-300 mb-8">Voici les technologies que j'utilise au quotidien pour concevoir des applications modernes, performantes et ergonomiques.</p>
+                <p className="text-center text-gray-700 dark:text-gray-300 mb-8">{t("technologies.subtitle")}</p>
             </div>
             <div className="w-full lg:w-[80%] mx-auto px-4 sm:px-10 lg:px-0">
                 <div className="flex flex-wrap justify-center gap-8">

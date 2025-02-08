@@ -8,17 +8,18 @@ import Footer from "@/components/Footer";
 import Contact from "@/components/Contact";
 import Accueil from "@/components/Accueil";
 import Header from "@/components/Header";
-
+import { useI18n } from '../../locales';
 export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
+  const t = useI18n();
 
   useEffect(() => {
     const typed = new Typed(".typing", {
       strings: [
         "",
-        "DEVELOPPEUR WEB,",
-        "DEVELOPPEUR FRONT-END,",
-        "DEVELOPPEUR BACK-END.",
+        t("accueil.developer"),
+        t("accueil.frontend"),
+        t("accueil.backend"),
       ],
       typeSpeed: 100,
       backSpeed: 60,
@@ -27,7 +28,7 @@ export default function Home() {
     return () => {
       typed.destroy();
     };
-  }, []);
+  }, [t]);
 
   return (
     <div className={darkMode ? "dark" : ""}>
