@@ -2,7 +2,8 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { FiMenu } from "react-icons/fi";
 import { useI18n, useScopedI18n, useChangeLocale, useCurrentLocale } from '../../locales';
-
+import enFlag from "../../public/en.webp";
+import frFlag from "../../public/fr.webp";
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeSection, setActiveSection] = useState("");
@@ -122,7 +123,10 @@ const Header = () => {
                         {/* Switcher de langue pour le menu mobile */}
                         <li>
                             <div className="flex items-center space-x-2 py-4">
-                                <span className="text-sm uppercase text-white">{locale === 'en' ? 'EN' : 'FR'}</span>
+                                <span className="text-sm uppercase">{locale === 'en'
+                                    ? <Image src={enFlag} alt="English flag" width={24} height={16} />
+                                    : <Image src={frFlag} alt="French flag" width={24} height={16} />
+                                }</span>
                                 <label className="relative inline-flex items-center cursor-pointer">
                                     <input
                                         type="checkbox"
@@ -178,7 +182,10 @@ const Header = () => {
                         </li>
                         <li>
                             <div className="flex items-center space-x-2 ml-6">
-                                <span className="text-sm uppercase">{locale === 'en' ? 'EN' : 'FR'}</span>
+                                <span className="text-sm uppercase">{locale === 'en'
+                                    ? <Image src={enFlag} alt="English flag" width={20} height={20} />
+                                    : <Image src={frFlag} alt="French flag" width={20} height={20} />
+                                }</span>
                                 <label className="relative inline-flex items-center cursor-pointer">
                                     <input
                                         type="checkbox"
