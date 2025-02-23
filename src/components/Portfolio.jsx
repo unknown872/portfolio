@@ -10,7 +10,7 @@ function Portfolio() {
   const projects = [
     { title: t('portfolio.project1'), image: '/mockup/uptech.webp', tech: ['Next.js', 'Tailwind CSS', 'PostgreSQL', 'React.js', 'Prisma'], link: 'https://uptechnologie-corpororation.com/' },
     { title: t('portfolio.project2'), image: '/mockup/djamo.webp', tech: ['HTML/CSS', 'Next.js', 'Tailwind CSS', 'TypeScript', 'Vercel'], link: 'https://djamo-landing.vercel.app/' },
-    { title: t('portfolio.project3'), image: '/mockup/sylvie.webp', tech: ['HTML/CSS', 'Next.js', 'Tailwind CSS', 'React.js', 'JavaScript', 'Prisma'], link: '#' },
+    { title: t('portfolio.project3'), image: '/mockup/ibag-frame.webp', tech: ['HTML/CSS', 'Next.js', 'Tailwind CSS', 'React.js', 'JavaScript', 'Prisma'], link: 'https://ibag-couture.vercel.app/' },
     { title: t('portfolio.project4'), image: '/mockup/ichiraku.webp', tech: ['HTML/CSS', 'Next.js', 'Tailwind CSS', 'Vercel'], link: 'https://ichiraku-landing.vercel.app/' },
     { title: t('portfolio.project5'), image: '/mockup/worlds_fever.webp', tech: ['HTML/CSS', 'Next.js', 'Tailwind CSS', 'Vercel'], link: 'https://worlds-fever.vercel.app/' },
   ];
@@ -28,11 +28,13 @@ function Portfolio() {
               <div className='relative h-60 bg-blue-500 overflow-hidden rounded-lg rounded-b-none'>
                 <Image src={project.image} alt={project.title} width={400} height={400} className="object-fill hover:object-cover rounded-lg rounded-b-none h-60 w-full" />
                 <a href={project.link} target="_blank">
-                  <FiExternalLink className="absolute bottom-2 right-2 text-blue-950 hover:text-gray-700 w-6 h-6 cursor-pointer" />
+                  <FiExternalLink className="absolute bottom-2 right-2 text-blue-950 hover:text-pink-500 w-6 h-6 cursor-pointer" />
                 </a>
               </div>
               <div key={index} className='h-auto px-4'>
-                <h3 className="font-poppins font-semibold mt-4 text-center text-blue-950 dark:text-white">{project.title}</h3>
+                <a href={project.link}>
+                  <h3 className="font-poppins font-semibold mt-4 text-center text-blue-950 dark:text-white hover:text-pink-500">{project.title}</h3>
+                </a>
                 <div className='px-2 py-4 space-y-2 space-x-2'>
                   {(project.tech || []).map((tech, techIndex) => (
                     <button key={techIndex} className="px-3 py-1 hover:bg-pink-500 text-pink-500 border border-pink-500 rounded-full hover:text-white">

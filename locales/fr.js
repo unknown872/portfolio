@@ -53,7 +53,7 @@ export default {
     subtitle: "Découvrez quelques-uns de mes projets réalisés.",
     project1: "Site Vitrine de l'Entreprise Up-Tech",
     project2: "Clone de la page d'accueil Djamo",
-    project3: "Site E-Commerce pour une parfumerie",
+    project3: "Site de démonstration pour IBAG-Couture",
     project4: "Ichiraku Ramen",
     project5: "Worlds Fever",
   },

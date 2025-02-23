@@ -56,7 +56,7 @@ export default {
     subtitle: "Discover some of my completed projects.",
     project1: "Up-Tech Company Showcase Site",
     project2: "Clone of the Djamo homepage",
-    project3: "E-Commerce site for a perfumery",
+    project3: "Demo Site for IBAG-Couture",
     project4: "Ichiraku Ramen",
     project5: "Worlds Fever",
   },
