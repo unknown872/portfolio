@@ -59,6 +59,7 @@ export default {
     project3: "Demo Site for IBAG-Couture",
     project4: "Ichiraku Ramen",
     project5: "Worlds Fever",
+    project6: "Netflix homepage clone",
   },
   contact: {
     subtitle1: "Do you want to contact me?",

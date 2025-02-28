@@ -9,8 +9,9 @@ function Portfolio() {
 
   const projects = [
     { title: t('portfolio.project1'), image: '/mockup/uptech.webp', tech: ['Next.js', 'Tailwind CSS', 'PostgreSQL', 'React.js', 'Prisma'], link: 'https://uptechnologie-corpororation.com/' },
-    { title: t('portfolio.project2'), image: '/mockup/djamo.webp', tech: ['HTML/CSS', 'Next.js', 'Tailwind CSS', 'TypeScript', 'Vercel'], link: 'https://djamo-landing.vercel.app/' },
+    { title: t('portfolio.project6'), image: '/mockup/netflix.webp', tech: ['HTML/CSS', 'Next.js', 'Tailwind CSS', 'TypeScript', 'Vercel'], link: 'https://tra-clone-netflix.vercel.app/' },
     { title: t('portfolio.project3'), image: '/mockup/ibag-frame.webp', tech: ['HTML/CSS', 'Next.js', 'Tailwind CSS', 'React.js', 'JavaScript', 'Prisma'], link: 'https://ibag-couture.vercel.app/' },
+    { title: t('portfolio.project2'), image: '/mockup/djamo.webp', tech: ['HTML/CSS', 'Next.js', 'Tailwind CSS', 'TypeScript', 'Vercel'], link: 'https://djamo-landing.vercel.app/' },
     { title: t('portfolio.project4'), image: '/mockup/ichiraku.webp', tech: ['HTML/CSS', 'Next.js', 'Tailwind CSS', 'Vercel'], link: 'https://ichiraku-landing.vercel.app/' },
     { title: t('portfolio.project5'), image: '/mockup/worlds_fever.webp', tech: ['HTML/CSS', 'Next.js', 'Tailwind CSS', 'Vercel'], link: 'https://worlds-fever.vercel.app/' },
   ];
@@ -32,7 +33,7 @@ function Portfolio() {
                 </a>
               </div>
               <div key={index} className='h-auto px-4'>
-                <a href={project.link}>
+                <a href={project.link} target="_blank">
                   <h3 className="font-poppins font-semibold mt-4 text-center text-blue-950 dark:text-white hover:text-pink-500">{project.title}</h3>
                 </a>
                 <div className='px-2 py-4 space-y-2 space-x-2'>
