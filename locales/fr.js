@@ -6,7 +6,7 @@ export default {
     developer: "DÉVELOPPEUR WEB",
     frontend: "DÉVELOPPEUR FRONT-END",
     backend: "DÉVELOPPEUR BACK-END",
-    fullStack: "DÉVELOPPEUR FULL-STACK,
+    fullStack: "DÉVELOPPEUR FULL-STACK",
     contact: "Me Contacter",
     download: "Télécharger mon CV",
   },
