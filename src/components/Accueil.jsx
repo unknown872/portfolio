@@ -32,8 +32,13 @@ function Accueil() {
                                 </p>
                                 {/* Boutons */}
                                 <div className="mt-6 flex sm:flex-row flex-col gap-4 sm:justify-start justify-center">
-                                    <a href="#contact"  className=" p-2 px-6 text-white font-semibold rounded-full outline outline-2 outline-purple-500 hover:bg-purple-600 transition ease-in-out delay-150">
-                                        {t("accueil.contact")}
+                                    <a
+                                      href="https://wa.me/221770957560"  
+                                      className="p-2 px-6 text-white font-semibold rounded-full outline outline-2 outline-purple-500 hover:bg-purple-600 transition ease-in-out delay-150"
+                                      target="_blank"  // Ouvre le lien dans un nouvel onglet
+                                      rel="noopener noreferrer"  // Sécurise le lien
+                                    >
+                                      {t("accueil.contact")}
                                     </a>
                                     <a href="/cv-tra.pdf" download className="p-2 px-6 text-white font-semibold rounded-full outline outline-2 outline-pink-500 hover:bg-pink-600 transition ease-in-out delay-150">
                                         {t("accueil.download")}
