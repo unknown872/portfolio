@@ -9,6 +9,7 @@ export default {
     developer: "WEB DEVELOPER",
     frontend: "FRONT-END DEVELOPER",
     backend: "BACK-END DEVELOPER",
+    fullStack: "FULL-STACK DEVELOPER",
     contact: "Contact Me",
     download: "Download CV",
   },
