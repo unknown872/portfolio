@@ -20,6 +20,7 @@ export default function Home() {
         t("accueil.developer"),
         t("accueil.frontend"),
         t("accueil.backend"),
+        t("accueil.fullStack"),
       ],
       typeSpeed: 100,
       backSpeed: 60,
