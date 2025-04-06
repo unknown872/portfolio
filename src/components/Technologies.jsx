@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt, FaNodeJs, FaNpm, FaDatabase, FaSql } from 'react-icons/fa';
-import { SiTypescript, SiNextdotjs, SiTailwindcss, SiFigma, SiCanva, SiPostgresql, SiPrisma } from 'react-icons/si';
+import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt, FaNodeJs, FaNpm, FaDatabase, FaNode, FaSql } from 'react-icons/fa';
+import { SiTypescript, SiNextdotjs, SiJquery, SiTailwindcss, SiFigma, SiCanva, SiPostgresql, SiPrisma, SiMongodb, SiMysql } from 'react-icons/si';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useI18n } from '../../locales';
@@ -12,17 +12,20 @@ const techIcons = [
     { icon: <SiTypescript className="text-blue-600" />, name: "TypeScript" },
     { icon: <FaReact className="text-blue-400" />, name: "React" },
     { icon: <SiNextdotjs className="text-black dark:text-white" />, name: "Next.js" },
+    { icon: <SiJquery className="text-blue-500" />, name: "jQuery" },
     { icon: <SiTailwindcss className="text-teal-500" />, name: "TailwindCSS" },
     { icon: <FaReact className="text-blue-400" />, name: "React Native" },
     { icon: <FaGitAlt className="text-red-500" />, name: "Git" },
-    { icon: <FaNodeJs className="text-green-500" />, name: "Node.js" },
+    {icon: <FaNode className="text-green-500" />, name: "Node.js"},
+    { icon: <FaNodeJs className="text-green-500" />, name: "Express.js" },
     { icon: <FaDatabase className="text-green-500" />, name: "SQL" },
     { icon: <SiPostgresql className="text-blue-500" />, name: "PostgreSQL" },
+    {icon: <SiMysql className="text-blue-500" />, name: "MySQL"},
+    { icon: <SiMongodb className="text-green-500" />, name: "MongoDB" },
     { icon: <FaNpm className="text-red-500" />, name: "NPM" },
     { icon: <SiPrisma className="text-blue-500" />, name: "Prisma" },
     { icon: <SiFigma className="text-purple-500" />, name: "Figma" },
-    { icon: <SiCanva className="text-blue-400" />, name: "Canva" },
-
+    { icon: <SiCanva className="text-blue-400" />, name: "Canva" }
 
 ];
 
