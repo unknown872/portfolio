@@ -9,6 +9,10 @@ const Header = () => {
     const [activeSection, setActiveSection] = useState("");
     const locale = useCurrentLocale();
     const changeLocale = useChangeLocale();
+    const [isOpen, setIsOpen] = useState(false);
+
+    // Fonction pour gérer l'ouverture/fermeture du dropdown
+    const toggleDropdown = () => setIsOpen(!isOpen);
 
     const t = useI18n();
 
@@ -180,24 +184,101 @@ const Header = () => {
                                 Contact
                             </a>
                         </li>
-                        <li>
-                            <div className="flex items-center space-x-2 ml-6">
-                                <span className="text-sm uppercase">{locale === 'en'
-                                    ? <Image src={enFlag} alt="English flag" width={20} height={20} />
-                                    : <Image src={frFlag} alt="French flag" width={20} height={20} />
-                                }</span>
-                                <label className="relative inline-flex items-center cursor-pointer">
-                                    <input
-                                        type="checkbox"
-                                        checked={locale === 'en'}
-                                        onChange={() => changeLocale(locale === 'en' ? 'fr' : 'en')}
-                                        className="sr-only"
+                        <li className="relative ml-6">
+                            <button
+                                onClick={toggleDropdown}
+                                className="relative flex items-center justify-center p-2.5 bg-white hover:bg-gray-50 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 group focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
+                            >
+                                {/* Drapeau de la langue actuelle */}
+                                <div className="relative overflow-hidden rounded-sm">
+                                    <Image
+                                        src={locale === 'en' ? enFlag : frFlag}
+                                        alt={locale === 'en' ? "English" : "Français"}
+                                        width={24}
+                                        height={24}
+                                        className="object-cover transition-transform duration-200 group-hover:scale-105"
                                     />
-                                    <div className="w-11 h-6 bg-gradient-to-r from-pink-500 to-blue-500 rounded-full transition-colors duration-200 ease-in-out peer-checked:bg-blue-500">
-                                        <div className={`absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform duration-200 ease-in-out ${locale === 'en' ? 'translate-x-5' : ''}`}></div>
+                                </div>
+
+                                {/* Indicateur de dropdown */}
+                                <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-blue-600 rounded-full flex items-center justify-center shadow-sm">
+                                    <svg
+                                        className={`w-2.5 h-2.5 text-white transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </div>
+                            </button>
+
+                            {/* Dropdown menu amélioré */}
+                            {isOpen && (
+                                <div className="absolute right-0 mt-3 w-48 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden z-50 animate-in slide-in-from-top-2 duration-200">
+                                    {/* En-tête du menu */}
+                                    <div className="px-4 py-2 bg-gray-50 border-b border-gray-100">
+                                        <p className="text-xs font-medium text-gray-600 uppercase tracking-wide">
+                                            Choisir la langue
+                                        </p>
                                     </div>
-                                </label>
-                            </div>
+
+                                    {/* Options de langue */}
+                                    <div className="py-1">
+                                        <button
+                                            onClick={() => {
+                                                changeLocale('en');
+                                                setIsOpen(false);
+                                            }}
+                                            className="w-full px-4 py-3 flex items-center space-x-3 hover:bg-blue-50 transition-colors duration-150 group"
+                                        >
+                                            <div className="relative">
+                                                <Image
+                                                    src={enFlag}
+                                                    alt="English"
+                                                    width={24}
+                                                    height={24}
+                                                    className="rounded-sm shadow-sm group-hover:scale-105 transition-transform duration-150"
+                                                />
+                                            </div>
+                                            <div className="flex-1 text-left">
+                                                <p className="text-sm font-medium text-gray-900">English</p>
+                                                <p className="text-xs text-gray-500">Anglais</p>
+                                            </div>
+                                            {/* Indicateur de sélection actuelle (optionnel) */}
+                                            {/* {currentLocale === 'en' && (
+                    <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                )} */}
+                                        </button>
+
+                                        <button
+                                            onClick={() => {
+                                                changeLocale('fr');
+                                                setIsOpen(false);
+                                            }}
+                                            className="w-full px-4 py-3 flex items-center space-x-3 hover:bg-blue-50 transition-colors duration-150 group"
+                                        >
+                                            <div className="relative">
+                                                <Image
+                                                    src={frFlag}
+                                                    alt="Français"
+                                                    width={24}
+                                                    height={24}
+                                                    className="rounded-sm shadow-sm group-hover:scale-105 transition-transform duration-150"
+                                                />
+                                            </div>
+                                            <div className="flex-1 text-left">
+                                                <p className="text-sm font-medium text-gray-900">Français</p>
+                                                <p className="text-xs text-gray-500">French</p>
+                                            </div>
+                                            {/* Indicateur de sélection actuelle (optionnel) */}
+                                            {/* {currentLocale === 'fr' && (
+                    <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                )} */}
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
                         </li>
                     </ul>
                 </nav>

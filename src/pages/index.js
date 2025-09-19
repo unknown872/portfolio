@@ -8,7 +8,8 @@ import Footer from "@/components/Footer";
 import Contact from "@/components/Contact";
 import Accueil from "@/components/Accueil";
 import Header from "@/components/Header";
-import { useI18n } from '../../locales';
+import Welcome from "@/components/Welcome";
+import { useI18n } from "../../locales";
 export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
   const t = useI18n();
@@ -33,15 +34,15 @@ export default function Home() {
 
   return (
     <div className={darkMode ? "dark" : ""}>
-          <Header/>
-          <main>
-          <Accueil/>
-          <Services/>
-          <Technologies/>
-          <Portfolio/>
-          <Contact/>
-          </main>
-          <Footer/>
+      <Header />
+      <main>
+        <Accueil />
+        <Services />
+        <Technologies />
+        <Portfolio />
+        <Contact />
+      </main>
+      <Footer />
     </div>
   );
 }

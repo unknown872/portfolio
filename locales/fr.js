@@ -11,6 +11,8 @@ export default {
     download: "Télécharger mon CV",
   },
   services: {
+    banner: "Ce que je propose",
+    title: "Mes Services",
     web: {
       webDev: {
         title: "Développement Web",
@@ -47,30 +49,61 @@ export default {
       },
   },
   technologies: {
+    all: "Toutes",
+    banner: "Technologies & Compétences",
+    title: "Mes Skills",
     subtitle:
       "Voici les technologies que j'utilise au quotidien pour concevoir des applications modernes, performantes et ergonomiques.",
   },
   portfolio: {
+    banner: "Mes réalisations",
     subtitle: "Découvrez quelques-uns de mes projets réalisés.",
     project1: "Site Vitrine de l'Entreprise Up-Tech",
     project2: "Clone de la page d'accueil Djamo",
     project3: "Site de démonstration pour IBAG-Couture",
     project4: "Ichiraku Ramen",
     project5: "Worlds Fever",
-    project6: "Clone de la page d'accueil Netflix",
+    project6: "Site E-commerce pour une boutique de parfumerie",
   },
   contact: {
+    banner: "Prenons contact",
+    title: "Contactez-moi",
+    description: "Prêt à donner vie à vos idées ? Discutons de votre prochain projet !",
     subtitle1: "Vous voulez me contacter ?",
     subtitle2: "Formulaire de contact",
     text1: "Entrez en contact",
     text2: "Envoyez-moi un message",
     text3: "Je vous répondrai le plus rapidement possible",
+    text4: "Je suis disponible pour discuter de vos projets et vous accompagner dans la réalisation de vos idées.",
     label1: "Prénom & Nom",
     label2: "Email",
     label3: "Téléphone",
     label4: "Objet",
     label5: "Message",
     button: "Envoyer",
+    infos : {
+        phone: "Téléphone",
+        email: "Objet",
+        location: "Localisation",
+        availability: {
+            title: "Disponibilité",
+            status: "24/7 disponible",
+        },
+        follow: "Suivez-moi",
+    },
+    placeholder: {
+        name: "Votre nom complet",
+        email: "Votre adresse e-mail",
+        phone: "Votre numéro de téléphone",
+        subject: "Sujet de votre message",
+        message: "Votre message..."
+    },
+    cardInfos: {
+        text1: "Prêt à commencer votre projet ?",
+        text2: "Contactez-moi dès aujourd'hui et discutons de vos idées et obtenir un devis personnalisé gratuit",
+        whatsapp: "WhatsApp direct",
+        email: "Email direct",
+    }
   },
-  footer: "© 2023 - Youssou Traore. Tous droits reservés.",
+  footer: "© " + new Date().getFullYear() + " - Youssou TRAORE. Tous droits reservés.",
 };
