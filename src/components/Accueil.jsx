@@ -103,7 +103,7 @@ function Accueil() {
 
                             {/* Bouton CV — secondaire, accent rose */}
                             <a
-                                href="/cv-tra.pdf"
+                                href="/CV_Youssou_Traoré.pdf"
                                 download
                                 className="group relative inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full font-semibold text-sm text-white overflow-hidden transition-all duration-500"
                                 style={{
