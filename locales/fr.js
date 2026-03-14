@@ -64,6 +64,9 @@ export default {
     project4: "Ichiraku Ramen",
     project5: "Worlds Fever",
     project6: "Site E-commerce pour une boutique de parfumerie",
+    project7: "Développement d’Interface pour Chatbot & Intégration d’APIs",
+    project8: "Plateforme de participation citoyenne Africtivistes Citizenlab",
+    project9: "Plateforme de participation citoyenne Africtivistes Citizenlab Sénégal",
   },
   contact: {
     banner: "Prenons contact",

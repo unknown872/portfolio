@@ -3,6 +3,8 @@ import Image from "next/image";
 import Typed from "typed.js";
 import { useI18n, useScopedI18n } from '../../locales';
 import Landing from "/public/landing-image.webp";
+import { FiArrowUpRight, FiDownload } from "react-icons/fi";
+import { FaWhatsapp } from "react-icons/fa";
 
 function Accueil() {
     const t = useI18n();
@@ -35,7 +37,7 @@ function Accueil() {
                     {/* Bloc Texte */}
                     <div className="text-white text-center sm:text-left w-full lg:max-w-2xl">
 
-                        {/* Présentation */}
+                        {/* Présentation — INCHANGÉ */}
                         <div className="bg-gradient-to-r from-rose-400 via-pink-500 to-blue-400 bg-opacity-80 text-black rounded-md p-4 w-56 sm:w-64 mx-auto sm:mx-0 shadow-lg mb-6">
                             <span className="font-merriweather text-sm sm:text-base">
                                 {t("accueil.presentation")}
@@ -54,22 +56,87 @@ function Accueil() {
                             {t("accueil.subtitle")}
                         </p>
 
-                        {/* Boutons */}
+                        {/* ═══════════════════════════════════════════
+                            BOUTONS CTA — Glassmorphism dark + icônes
+                            ═══════════════════════════════════════════ */}
                         <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center sm:justify-start">
+                            {/* Bouton Contact — primaire, accent violet */}
                             <a
                                 href="https://wa.me/221770957560"
-                                className="p-2 px-6 text-white font-semibold rounded-full outline outline-2 outline-purple-500 hover:bg-purple-600 transition"
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                className="group relative inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full font-semibold text-sm text-white overflow-hidden transition-all duration-500"
+                                style={{
+                                    background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(139, 92, 246, 0.35))',
+                                    backdropFilter: 'blur(16px)',
+                                    WebkitBackdropFilter: 'blur(16px)',
+                                    border: '1px solid rgba(168, 85, 247, 0.35)',
+                                    boxShadow: '0 0 20px rgba(168, 85, 247, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+                                }}
+                                onMouseEnter={(e) => {
+                                    Object.assign(e.currentTarget.style, {
+                                        background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.4), rgba(139, 92, 246, 0.5))',
+                                        borderColor: 'rgba(168, 85, 247, 0.5)',
+                                        boxShadow: '0 0 30px rgba(168, 85, 247, 0.3), 0 8px 24px rgba(168, 85, 247, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15)',
+                                        transform: 'translateY(-2px)',
+                                    });
+                                }}
+                                onMouseLeave={(e) => {
+                                    Object.assign(e.currentTarget.style, {
+                                        background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(139, 92, 246, 0.35))',
+                                        borderColor: 'rgba(168, 85, 247, 0.35)',
+                                        boxShadow: '0 0 20px rgba(168, 85, 247, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+                                        transform: 'translateY(0)',
+                                    });
+                                }}
                             >
-                                {t("accueil.contact")}
+                                {/* Shine sweep au hover */}
+                                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                                    style={{
+                                        background: 'linear-gradient(105deg, transparent 35%, rgba(255,255,255,0.06) 42%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.06) 58%, transparent 65%)',
+                                    }}
+                                />
+                                <FaWhatsapp className="w-[18px] h-[18px] relative z-10 transition-transform duration-300 group-hover:scale-110" />
+                                <span className="relative z-10">{t("accueil.contact")}</span>
+                                <FiArrowUpRight className="w-4 h-4 relative z-10 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                             </a>
+
+                            {/* Bouton CV — secondaire, accent rose */}
                             <a
                                 href="/cv-tra.pdf"
                                 download
-                                className="p-2 px-6 text-white font-semibold rounded-full outline outline-2 outline-pink-500 hover:bg-pink-600 transition"
+                                className="group relative inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full font-semibold text-sm text-white overflow-hidden transition-all duration-500"
+                                style={{
+                                    background: 'rgba(255, 255, 255, 0.05)',
+                                    backdropFilter: 'blur(16px)',
+                                    WebkitBackdropFilter: 'blur(16px)',
+                                    border: '1px solid rgba(236, 72, 153, 0.3)',
+                                    boxShadow: '0 0 16px rgba(236, 72, 153, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.06)',
+                                }}
+                                onMouseEnter={(e) => {
+                                    Object.assign(e.currentTarget.style, {
+                                        background: 'linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(219, 39, 119, 0.28))',
+                                        borderColor: 'rgba(236, 72, 153, 0.45)',
+                                        boxShadow: '0 0 28px rgba(236, 72, 153, 0.2), 0 8px 24px rgba(236, 72, 153, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+                                        transform: 'translateY(-2px)',
+                                    });
+                                }}
+                                onMouseLeave={(e) => {
+                                    Object.assign(e.currentTarget.style, {
+                                        background: 'rgba(255, 255, 255, 0.05)',
+                                        borderColor: 'rgba(236, 72, 153, 0.3)',
+                                        boxShadow: '0 0 16px rgba(236, 72, 153, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.06)',
+                                        transform: 'translateY(0)',
+                                    });
+                                }}
                             >
-                                {t("accueil.download")}
+                                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                                    style={{
+                                        background: 'linear-gradient(105deg, transparent 35%, rgba(255,255,255,0.05) 42%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 58%, transparent 65%)',
+                                    }}
+                                />
+                                <FiDownload className="w-4 h-4 relative z-10 transition-transform duration-300 group-hover:translate-y-0.5" />
+                                <span className="relative z-10">{t("accueil.download")}</span>
                             </a>
                         </div>
 
@@ -97,7 +164,6 @@ function Accueil() {
                 </div>
             </div>
         </section>
-
     );
 }
 
