@@ -69,7 +69,8 @@ export default {
     project6: "Website for a Perfume Shop",
     project7: "Chatbot Interface Development & APIs Integration",
     project8: "Civic Engagement Platform for Africtivistes Citizenlab Senegal",
-    project9: "Civic Engagement Platform for Africtivistes Citizenlab"
+    project9: "Civic Engagement Platform for Africtivistes Citizenlab",
+    project10: "Mon-Vélo: Online Bike Store"
   },
   contact: {
     banner: "Let's get in touch",

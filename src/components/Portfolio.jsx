@@ -19,6 +19,13 @@ function Portfolio() {
 
   const projects = [
     { 
+      title: t('portfolio.project10'), 
+      image: '/mockup/monvelo-prfl.webp', 
+      tech: ['HTML/CSS', 'Next.JS', 'JavaScript', 'Tailwind CSS', 'React.js', 'Prisma', 'Supabase'], 
+      link: 'https://monvelo-frontend.vercel.app/',
+      category: 'E-COMMERCE'
+    },
+    { 
       title: t('portfolio.project9'), 
       image: '/mockup/acls.png', 
       tech: ['HTML/CSS', 'Astro', 'JavaScript', 'TypeScript', 'Tailwind CSS', 'React.js', 'WordPress'], 
@@ -28,7 +35,7 @@ function Portfolio() {
     { 
       title: t('portfolio.project8'), 
       image: '/mockup/afcl-pfl.png', 
-      tech: ['HTML/CSS', 'Next.js', 'JavaScript', 'Tailwind CSS', 'React.js', 'WordPress', 'TypeScript'], 
+      tech: ['HTML/CSS', 'Astro', 'JavaScript', 'Tailwind CSS', 'React.js', 'WordPress', 'TypeScript'], 
       link: 'https://africtivistescitizenlab.org/',
       category: 'WEB'
     },

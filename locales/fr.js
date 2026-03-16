@@ -67,6 +67,7 @@ export default {
     project7: "Développement d’Interface pour Chatbot & Intégration d’APIs",
     project8: "Plateforme de participation citoyenne Africtivistes Citizenlab",
     project9: "Plateforme de participation citoyenne Africtivistes Citizenlab Sénégal",
+    project10: "Mon-Vélo : Boutique en ligne spécialisée dans les vélos",
   },
   contact: {
     banner: "Prenons contact",
