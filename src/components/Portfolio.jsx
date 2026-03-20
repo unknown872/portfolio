@@ -19,6 +19,13 @@ function Portfolio() {
 
   const projects = [
     { 
+      title: t('portfolio.project11'), 
+      image: '/mockup/senegal24.webp', 
+      tech: ['HTML/CSS', 'Next.JS', 'JavaScript', 'Tailwind CSS', 'React.js', 'Hygraph'], 
+      link: 'https://senegal24.vercel.app/',
+      category: 'WEB'
+    },
+    { 
       title: t('portfolio.project10'), 
       image: '/mockup/monvelo-prfl.webp', 
       tech: ['HTML/CSS', 'Next.JS', 'JavaScript', 'Tailwind CSS', 'React.js', 'Prisma', 'Supabase'], 

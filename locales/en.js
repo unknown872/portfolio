@@ -70,7 +70,8 @@ export default {
     project7: "Chatbot Interface Development & APIs Integration",
     project8: "Civic Engagement Platform for Africtivistes Citizenlab Senegal",
     project9: "Civic Engagement Platform for Africtivistes Citizenlab",
-    project10: "Mon-Vélo: Online Bike Store"
+    project10: "Mon-Vélo: Online Bike Store",
+    project11: "Online News and Information Platform",
   },
   contact: {
     banner: "Let's get in touch",
