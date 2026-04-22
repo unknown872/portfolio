@@ -112,6 +112,8 @@ function Accueil() {
                                     WebkitBackdropFilter: 'blur(16px)',
                                     border: '1px solid rgba(236, 72, 153, 0.3)',
                                     boxShadow: '0 0 16px rgba(236, 72, 153, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.06)',
+                                    pointerEvents: 'none',
+                                    opacity: 0.5,
                                 }}
                                 onMouseEnter={(e) => {
                                     Object.assign(e.currentTarget.style, {
