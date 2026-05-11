@@ -1,11 +1,28 @@
-import "@/styles/globals.css";
-import { I18nProvider } from "../../locales";
-import {useEffect, useRouter} from "react";
+import { NextIntlClientProvider } from "next-intl";
+import { useRouter } from "next/router";
+import "@/styles/globals.css"; // ⚠️ adaptez selon votre setup
+
+// Import des messages
+import frMessages from "../../messages/fr.json";
+import enMessages from "../../messages/en.json";
+
+const messagesMap = {
+    fr: frMessages,
+    en: enMessages,
+};
+
 export default function App({ Component, pageProps }) {
-  
-  return (
-    <I18nProvider locale={pageProps.locale}>
-      <Component {...pageProps} />
-    </I18nProvider>
-  )
+    const router = useRouter();
+    const locale = router.locale || "en";
+    const messages = messagesMap[locale] || messagesMap.en;
+
+    return (
+        <NextIntlClientProvider
+            locale={locale}
+            messages={messages}
+            timeZone="Africa/Dakar"
+        >
+            <Component {...pageProps} />
+        </NextIntlClientProvider>
+    );
 }

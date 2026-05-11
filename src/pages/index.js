@@ -1,6 +1,4 @@
-import { useState, useEffect } from "react";
-import Image from "next/image";
-import Typed from "typed.js";
+import Head from "next/head";
 import Services from "@/components/Services";
 import Technologies from "@/components/Technologies";
 import Portfolio from "@/components/Portfolio";
@@ -8,41 +6,31 @@ import Footer from "@/components/Footer";
 import Contact from "@/components/Contact";
 import Accueil from "@/components/Accueil";
 import Header from "@/components/Header";
-import Welcome from "@/components/Welcome";
-import { useI18n } from "../../locales";
+
 export default function Home() {
-  const [darkMode, setDarkMode] = useState(false);
-  const t = useI18n();
+    return (
+        <>
+            <Head>
+                <title>Youssou Traore — Full-Stack Developer</title>
+                <meta
+                    name="description"
+                    content="Portfolio de Youssou Traore, développeur full-stack"
+                />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="icon" href="/logo.webp" />
+            </Head>
 
-  useEffect(() => {
-    const typed = new Typed(".typing", {
-      strings: [
-        "",
-        t("accueil.developer"),
-        t("accueil.frontend"),
-        t("accueil.backend"),
-        t("accueil.fullStack"),
-      ],
-      typeSpeed: 100,
-      backSpeed: 60,
-      loop: true,
-    });
-    return () => {
-      typed.destroy();
-    };
-  }, [t]);
-
-  return (
-    <div className={darkMode ? "dark" : ""}>
-      <Header />
-      <main>
-        <Accueil />
-        <Services />
-        <Technologies />
-        <Portfolio />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
-  );
+            <div className="bg-[#0a0a0f] min-h-screen text-white antialiased">
+                <Header />
+                <main>
+                    <Accueil />
+                    <Services />
+                    <Technologies />
+                    <Portfolio />
+                    <Contact />
+                </main>
+                <Footer />
+            </div>
+        </>
+    );
 }

@@ -1,399 +1,222 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
-import {
-  FiExternalLink,
-  FiGithub,
-  FiEye,
-  FiArrowUpRight,
-} from "react-icons/fi";
-import { useI18n } from "../../locales";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import { FiArrowUpRight, FiGithub, FiExternalLink, FiPlus } from "react-icons/fi";
+import { useTranslations } from "next-intl";
+import clsx from "clsx";
+
+// La structure des projets contient une clé i18n pour le titre
+const PROJECTS = [
+    { key: "cinetheque", image: "/mockup/cinetheque.webp", tech: ["React", "Tailwind CSS", "Mongoose", "MongoDB", "Node.JS", "Express.JS"], link: "https://cinetheque-lac.vercel.app/", category: "Web" },
+    { key: "monvelo", image: "/mockup/monvelo-prfl.webp", tech: ["Next.js", "React", "Tailwind CSS", "Prisma", "Supabase", "Node.JS"], link: "https://monvelo-frontend.vercel.app/", category: "E-Commerce" },
+    { key: "senegal24", image: "/mockup/senegal24.webp", tech: ["Next.js", "React", "Tailwind CSS", "Hygraph", "GraphQL"], link: "https://senegal24.vercel.app/", category: "Web" },
+    { key: "acls", image: "/mockup/acls.png", tech: ["Astro", "TypeScript", "React", "Tailwind CSS", "WordPress"], link: "https://citizenlabsenegal.org/", category: "Web" },
+    { key: "afcl", image: "/mockup/afcl-pfl.png", tech: ["Astro", "TypeScript", "React", "Tailwind CSS", "WordPress"], link: "https://africtivistescitizenlab.org/", category: "Web" },
+    { key: "chatbot", image: "/mockup/chatbot-pfl.webp", tech: ["Next.js", "React", "Tailwind CSS"], link: "https://chatbotcitizenlab.vercel.app/", category: "Web" },
+    { key: "sylvie", image: "/mockup/sylvie.webp", tech: ["Next.js", "React", "Tailwind CSS", "PostgreSQL", "Prisma"], link: "https://sylvie-app.vercel.app/", category: "E-Commerce" },
+    { key: "uptech", image: "/mockup/uptech.webp", tech: ["Next.js", "React", "Tailwind CSS", "PostgreSQL", "Prisma"], link: "https://uptechnologie-corpororation.com/", category: "Web" },
+    { key: "ibag", image: "/mockup/ibag-frame.webp", tech: ["Next.js", "React", "Tailwind CSS", "PostgreSQL", "Prisma"], link: "https://ibag-couture.vercel.app/", category: "E-Commerce" },
+    { key: "djamo", image: "/mockup/djamo.webp", tech: ["Next.js", "React", "TypeScript", "Tailwind CSS"], link: "https://djamo-landing.vercel.app/", category: "Landing" },
+    { key: "ichiraku", image: "/mockup/ichiraku.webp", tech: ["Next.js", "React", "Tailwind CSS"], link: "https://ichiraku-landing.vercel.app/", category: "Landing" },
+    { key: "worldsFever", image: "/mockup/worlds_fever.webp", tech: ["Next.js", "React", "Tailwind CSS"], link: "https://worlds-fever.vercel.app/", category: "Web" },
+];
+
+const INITIAL_VISIBLE = 6;
 
 function Portfolio() {
-  const t = useI18n();
-  const [hoveredProject, setHoveredProject] = useState(null);
+    const t = useTranslations("portfolio");
+    const [showAll, setShowAll] = useState(false);
+    const sectionRef = useRef(null);
+    const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
-  useEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: true,
-      offset: 100,
-    });
-  }, []);
+    const visibleProjects = showAll ? PROJECTS : PROJECTS.slice(0, INITIAL_VISIBLE);
 
-  const projects = [
-    {
-      title: t("portfolio.project11"),
-      image: "/mockup/monvelo-prfl.webp",
-      tech: [
-        "HTML/CSS",
-        "Next.JS",
-        "JavaScript",
-        "Tailwind CSS",
-        "React.js",
-        "Prisma",
-        "Supabase",
-      ],
-      link: "https://monvelo-frontend.vercel.app/",
-      category: "E-COMMERCE",
-    },
-    {
-      title: t("portfolio.project10"),
-      image: "/mockup/senegal24.webp",
-      tech: [
-        "HTML/CSS",
-        "Next.JS",
-        "JavaScript",
-        "Tailwind CSS",
-        "React.js",
-        "Hygraph",
-      ],
-      link: "https://senegal24.vercel.app/",
-      category: "WEB",
-    },
-    {
-      title: t("portfolio.project9"),
-      image: "/mockup/acls.png",
-      tech: [
-        "HTML/CSS",
-        "Astro",
-        "JavaScript",
-        "TypeScript",
-        "Tailwind CSS",
-        "React.js",
-        "WordPress",
-      ],
-      link: "https://citizenlabsenegal.org/",
-      category: "WEB",
-    },
-    {
-      title: t("portfolio.project8"),
-      image: "/mockup/afcl-pfl.png",
-      tech: [
-        "HTML/CSS",
-        "Astro",
-        "JavaScript",
-        "Tailwind CSS",
-        "React.js",
-        "WordPress",
-        "TypeScript",
-      ],
-      link: "https://africtivistescitizenlab.org/",
-      category: "WEB",
-    },
-    {
-      title: t("portfolio.project7"),
-      image: "/mockup/chatbot-pfl.webp",
-      tech: ["HTML/CSS", "Next.js", "JavaScript", "Tailwind CSS", "React.js"],
-      link: "https://chatbotcitizenlab.vercel.app/",
-      category: "WEB",
-    },
-    {
-      title: t("portfolio.project6"),
-      image: "/mockup/sylvie.webp",
-      tech: [
-        "HTML/CSS",
-        "Next.js",
-        "JavaScript",
-        "Tailwind CSS",
-        "React.js",
-        "PostgreSQL",
-        "Prisma",
-      ],
-      link: "https://sylvie-app.vercel.app/",
-      category: "E-COMMERCE",
-    },
-    {
-      title: t("portfolio.project1"),
-      image: "/mockup/uptech.webp",
-      tech: ["Next.js", "Tailwind CSS", "PostgreSQL", "React.js", "Prisma"],
-      link: "https://uptechnologie-corpororation.com/",
-      category: "WEB",
-    },
-    {
-      title: t("portfolio.project3"),
-      image: "/mockup/ibag-frame.webp",
-      tech: [
-        "HTML/CSS",
-        "Next.js",
-        "Tailwind CSS",
-        "React.js",
-        "PostgreSQL",
-        "JavaScript",
-        "Prisma",
-      ],
-      link: "https://ibag-couture.vercel.app/",
-      category: "E-COMMERCE",
-    },
-    {
-      title: t("portfolio.project2"),
-      image: "/mockup/djamo.webp",
-      tech: ["HTML/CSS", "Next.js", "Tailwind CSS", "TypeScript", "React.js"],
-      link: "https://djamo-landing.vercel.app/",
-      category: "LANDING",
-    },
-    {
-      title: t("portfolio.project4"),
-      image: "/mockup/ichiraku.webp",
-      tech: ["HTML/CSS", "Next.js", "Tailwind CSS", "React.js"],
-      link: "https://ichiraku-landing.vercel.app/",
-      category: "LANDING",
-    },
-    {
-      title: t("portfolio.project5"),
-      image: "/mockup/worlds_fever.webp",
-      tech: ["HTML/CSS", "Next.js", "Tailwind CSS", "React.js"],
-      link: "https://worlds-fever.vercel.app/",
-      category: "WEB",
-    },
-  ];
-
-  const getTechColor = (tech) => {
-    const colors = {
-      "Next.js": "bg-black/80 text-white",
-      "React.js": "bg-blue-500/80 text-white",
-      TypeScript: "bg-blue-600/80 text-white",
-      JavaScript: "bg-yellow-500/80 text-black",
-      "Tailwind CSS": "bg-teal-500/80 text-white",
-      PostgreSQL: "bg-blue-700/80 text-white",
-      Prisma: "bg-gray-700/80 text-white",
-      "HTML/CSS": "bg-orange-500/80 text-white",
-      Astro: "bg-purple-600/80 text-white",
-      WordPress: "bg-blue-800/80 text-white",
-    };
-    return colors[tech] || "bg-gray-500/80 text-white";
-  };
-
-  // Layout pattern : première carte large, puis alternance
-  const getCardLayout = (index) => {
-    // Première carte : pleine largeur en 2 colonnes
-    if (index === 0) return "md:col-span-2 lg:col-span-2";
-    // Les cartes 1 et 2 : normales
-    if (index === 1 || index === 2) return "md:col-span-1 lg:col-span-1";
-    // Carte 6 : large
-    if (index === 5) return "md:col-span-2 lg:col-span-2";
-    // Le reste : normal
-    return "md:col-span-1 lg:col-span-1";
-  };
-
-  const getImageHeight = (index) => {
-    if (index === 0 || index === 5) return "h-72 md:h-80";
-    return "h-56 md:h-64";
-  };
-
-  return (
-    <section
-      id="portfolio"
-      className="w-full py-20 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 relative overflow-hidden"
-    >
-      {/* Éléments décoratifs de fond — INCHANGÉS */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-10 right-10 w-72 h-72 bg-gradient-to-br from-purple-400/10 to-pink-400/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 left-10 w-96 h-96 bg-gradient-to-br from-blue-400/10 to-cyan-400/10 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/3 left-1/2 w-64 h-64 bg-gradient-to-br from-teal-400/5 to-green-400/5 rounded-full blur-3xl"></div>
-      </div>
-
-      <div className="container mx-auto px-6 relative z-10">
-        {/* En-tête de section — INCHANGÉ */}
-        <div className="text-center mb-16" data-aos="fade-up">
-          <span className="text-sm font-semibold text-blue-600 uppercase tracking-wider mb-2 block">
-            {t("portfolio.banner")}
-          </span>
-          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
-            PORTFOLIO
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full mb-6"></div>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
-            {t("portfolio.subtitle")}
-          </p>
-        </div>
-
-        {/* ═══════════════════════════════════════════
-            GRILLE RETOUCHÉE — Layout asymétrique + Glassmorphism
-            ═══════════════════════════════════════════ */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-          {projects.map((project, index) => (
+    return (
+        <section id="portfolio" ref={sectionRef} className="relative w-full py-24 md:py-32 bg-[#0a0a0f] overflow-hidden">
             <div
-              key={index}
-              data-aos="fade-up"
-              data-aos-delay={index * 80}
-              className={`group relative rounded-3xl overflow-hidden transition-all duration-500 cursor-pointer ${getCardLayout(index)}`}
-              onMouseEnter={() => setHoveredProject(index)}
-              onMouseLeave={() => setHoveredProject(null)}
-              style={{
-                transform:
-                  hoveredProject === index
-                    ? "translateY(-8px) scale(1.01)"
-                    : "translateY(0) scale(1)",
-                transition:
-                  "transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1)",
-                boxShadow:
-                  hoveredProject === index
-                    ? "0 25px 60px -12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.6) inset"
-                    : "0 8px 32px -8px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.5) inset",
-              }}
-            >
-              {/* Glassmorphism card background */}
-              <div className="absolute inset-0 bg-white/40 backdrop-blur-xl border border-white/30 rounded-3xl z-0" />
+                className="absolute inset-0 opacity-[0.06]"
+                style={{
+                    backgroundImage: `
+                        linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)
+                    `,
+                    backgroundSize: "100px 100px",
+                    maskImage: "radial-gradient(ellipse 60% 50% at 50% 30%, black 30%, transparent 80%)",
+                    WebkitMaskImage: "radial-gradient(ellipse 60% 50% at 50% 30%, black 30%, transparent 80%)",
+                }}
+            />
 
-              {/* Image du projet */}
-              <div
-                className={`relative ${getImageHeight(index)} overflow-hidden`}
-              >
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  width={800}
-                  height={400}
-                  className="w-full h-full object-cover transition-all duration-700 ease-out"
-                  style={{
-                    transform:
-                      hoveredProject === index ? "scale(1.08)" : "scale(1)",
-                    filter:
-                      hoveredProject === index
-                        ? "brightness(0.85)"
-                        : "brightness(1)",
-                  }}
-                />
+            <div
+                className="absolute top-1/4 -right-32 w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none"
+                style={{ background: "radial-gradient(circle, rgba(34,211,238,0.06), transparent 70%)" }}
+            />
+            <div
+                className="absolute bottom-1/4 -left-32 w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none"
+                style={{ background: "radial-gradient(circle, rgba(139,92,246,0.06), transparent 70%)" }}
+            />
 
-                {/* Overlay glassmorphism au hover */}
-                <div
-                  className="absolute inset-0 flex items-center justify-center transition-all duration-500"
-                  style={{
-                    opacity: hoveredProject === index ? 1 : 0,
-                    background:
-                      "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.4) 100%)",
-                    backdropFilter:
-                      hoveredProject === index ? "blur(4px)" : "blur(0px)",
-                  }}
+            <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-16">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.6 }}
+                    className="text-center mb-16 md:mb-20"
                 >
-                  <div
-                    className="flex items-center gap-3 transition-all duration-500"
-                    style={{
-                      transform:
-                        hoveredProject === index
-                          ? "translateY(0) scale(1)"
-                          : "translateY(20px) scale(0.8)",
-                      opacity: hoveredProject === index ? 1 : 0,
-                    }}
-                  >
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-5 py-2.5 bg-white/90 backdrop-blur-md text-gray-800 text-sm font-medium rounded-full transition-all duration-300 hover:bg-white hover:shadow-lg hover:shadow-white/25"
+                    <div className="inline-flex items-center gap-2 mb-5">
+                        <span className="h-px w-8 bg-cyan-400/50" />
+                        <span className="text-[10px] md:text-[11px] font-mono font-semibold text-cyan-400 uppercase tracking-[0.25em]">
+                            {t("banner")}
+                        </span>
+                        <span className="h-px w-8 bg-cyan-400/50" />
+                    </div>
+
+                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-5">
+                        <span className="bg-gradient-to-br from-white via-white to-white/60 bg-clip-text text-transparent">
+                            {t("title")}
+                        </span>
+                    </h2>
+
+                    <p className="text-white/50 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+                        {t("subtitle")}
+                    </p>
+                </motion.div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+                    <AnimatePresence>
+                        {visibleProjects.map((project, index) => (
+                            <ProjectCard
+                                key={project.link}
+                                project={project}
+                                index={index}
+                                isInView={isInView}
+                                title={t(`projects.${project.key}`)}
+                                viewProjectLabel={t("viewProject")}
+                            />
+                        ))}
+                    </AnimatePresence>
+                </div>
+
+                {PROJECTS.length > INITIAL_VISIBLE && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={isInView ? { opacity: 1, y: 0 } : {}}
+                        transition={{ duration: 0.6, delay: 0.4 }}
+                        className="flex flex-col items-center mt-14 gap-4"
                     >
-                      <FiEye className="w-4 h-4" />
-                      Voir le projet
-                    </a>
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2.5 bg-white/20 backdrop-blur-md border border-white/30 text-white rounded-full transition-all duration-300 hover:bg-white/40 hover:scale-110"
-                    >
-                      <FiArrowUpRight className="w-4 h-4" />
-                    </a>
-                  </div>
-                </div>
+                        <motion.button
+                            onClick={() => setShowAll(!showAll)}
+                            whileHover={{ y: -2 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="group relative inline-flex items-center gap-3 px-7 py-3.5 rounded-full font-medium text-sm text-white bg-white/[0.03] border border-white/[0.1] hover:bg-white/[0.06] hover:border-cyan-500/40 hover:shadow-[0_0_25px_rgba(34,211,238,0.15)] transition-all duration-500 backdrop-blur-sm overflow-hidden"
+                        >
+                            <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent" />
 
-                {/* Badge catégorie — glassmorphism */}
-                <div className="absolute top-4 left-4 z-10">
-                  <span className="px-3 py-1.5 bg-white/70 backdrop-blur-md uppercase text-gray-700 text-[10px] font-bold tracking-widest rounded-full border border-white/40">
-                    {project.category}
-                  </span>
-                </div>
+                            <motion.div animate={{ rotate: showAll ? 45 : 0 }} transition={{ duration: 0.3 }} className="relative">
+                                <FiPlus className="w-4 h-4 text-cyan-400" />
+                            </motion.div>
+                            <span className="relative">
+                                {showAll
+                                    ? t("showLess")
+                                    : t("showMore", { count: PROJECTS.length - INITIAL_VISIBLE })}
+                            </span>
+                        </motion.button>
 
-                {/* Ligne lumineuse en bas de l'image au hover */}
-                <div
-                  className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 transition-all duration-700"
-                  style={{
-                    transform:
-                      hoveredProject === index ? "scaleX(1)" : "scaleX(0)",
-                    transformOrigin: "left center",
-                  }}
-                />
-              </div>
-
-              {/* Contenu du projet — glassmorphism */}
-              <div className="relative z-10 p-5">
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block transition-colors duration-300"
-                >
-                  <h3
-                    className="text-lg font-bold text-gray-800 mb-3 leading-tight flex items-center gap-2 transition-all duration-300"
-                    style={{
-                      color: hoveredProject === index ? "#2563eb" : "#1f2937",
-                    }}
-                  >
-                    {project.title}
-                    <FiArrowUpRight
-                      className="w-4 h-4 transition-all duration-300 flex-shrink-0"
-                      style={{
-                        transform:
-                          hoveredProject === index
-                            ? "translate(2px, -2px)"
-                            : "translate(0, 0)",
-                        opacity: hoveredProject === index ? 1 : 0.4,
-                      }}
-                    />
-                  </h3>
-                </a>
-
-                {/* Technologies — petites pills glassmorphism */}
-                <div className="flex flex-wrap gap-1.5">
-                  {project.tech
-                    .filter((v, i, a) => a.indexOf(v) === i)
-                    .map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className={`px-2.5 py-1 text-[10px] font-semibold rounded-full backdrop-blur-sm transition-all duration-300 ${getTechColor(tech)}`}
-                        style={{
-                          transform:
-                            hoveredProject === index
-                              ? "translateY(0)"
-                              : "translateY(0)",
-                          opacity: hoveredProject === index ? 1 : 0.85,
-                        }}
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                </div>
-              </div>
+                        <a
+                            href="https://github.com/unknown872?tab=repositories"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-wider text-white/40 hover:text-white transition-colors duration-300"
+                        >
+                            <FiGithub className="w-3.5 h-3.5" />
+                            <span>{t("allRepos")}</span>
+                            <FiArrowUpRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        </a>
+                    </motion.div>
+                )}
             </div>
-          ))}
-        </div>
+        </section>
+    );
+}
 
-        {/* ═══════════════════════════════════════════
-            BOUTON GITHUB RETOUCHÉ — CTA glassmorphism
-            ═══════════════════════════════════════════ */}
-        <div
-          className="flex justify-center mt-14"
-          data-aos="fade-up"
-          data-aos-delay="200"
-        >
-          <a
-            href="https://github.com/unknown872?tab=repositories"
+function ProjectCard({ project, index, isInView, title, viewProjectLabel }) {
+    const cardRef = useRef(null);
+    const isFeatured = index === 0 || index === 5;
+
+    const handleMouseMove = (e) => {
+        if (!cardRef.current) return;
+        const rect = cardRef.current.getBoundingClientRect();
+        cardRef.current.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+        cardRef.current.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+    };
+
+    return (
+        <motion.a
+            href={project.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="group/btn relative flex items-center gap-3 px-7 py-3.5 bg-white/50 backdrop-blur-xl border border-white/40 rounded-full text-gray-700 font-medium transition-all duration-500 hover:bg-white/80 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1"
-          >
-            <FiGithub className="w-5 h-5 transition-transform duration-500 group-hover/btn:rotate-[360deg]" />
-            <span className="text-sm">Voir tous mes projets</span>
-            <FiArrowUpRight className="w-4 h-4 transition-all duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.6, delay: index * 0.08, ease: [0.23, 1, 0.32, 1] }}
+            className={clsx("group block", isFeatured && "md:col-span-2 lg:col-span-2")}
+        >
+            <div
+                ref={cardRef}
+                onMouseMove={handleMouseMove}
+                className="relative h-full rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-white/[0.15] transition-all duration-500 overflow-hidden"
+            >
+                <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-20"
+                    style={{
+                        background: `radial-gradient(500px circle at var(--mouse-x) var(--mouse-y), rgba(34,211,238,0.08), transparent 40%)`,
+                    }}
+                />
 
-            {/* Glow effect au hover */}
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-600/0 via-purple-600/0 to-pink-600/0 transition-all duration-500 group-hover/btn:from-blue-600/5 group-hover/btn:via-purple-600/5 group-hover/btn:to-pink-600/5" />
-          </a>
-        </div>
-      </div>
-    </section>
-  );
+                <div className={clsx("relative overflow-hidden", isFeatured ? "h-72 md:h-96" : "h-56 md:h-64")}>
+                    <Image
+                        src={project.image}
+                        alt={title}
+                        width={800}
+                        height={500}
+                        className="w-full h-full object-cover object-top transition-all duration-700 ease-out group-hover:scale-105"
+                    />
+
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/20 to-transparent" />
+
+                    <div className="absolute top-4 left-4 z-10">
+                        <span className="px-2.5 py-1 bg-black/40 backdrop-blur-md border border-white/10 text-[10px] font-mono font-semibold text-white/80 uppercase tracking-widest rounded-full">
+                            {project.category}
+                        </span>
+                    </div>
+
+                    <div className="absolute bottom-4 right-4 z-10 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cyan-400 text-[#0a0a0f] text-[11px] font-semibold uppercase tracking-wider shadow-[0_0_20px_rgba(34,211,238,0.4)]">
+                            <FiExternalLink className="w-3 h-3" />
+                            <span>{viewProjectLabel}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="relative z-10 p-5 md:p-6">
+                    <h3 className="text-base md:text-lg font-semibold text-white mb-3 leading-tight flex items-start justify-between gap-3 group-hover:text-cyan-50 transition-colors duration-300">
+                        <span className="line-clamp-2">{title}</span>
+                        <FiArrowUpRight className="w-4 h-4 flex-shrink-0 text-white/30 group-hover:text-cyan-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
+                    </h3>
+
+                    <div className="flex flex-wrap gap-1.5">
+                        {project.tech.map((tech, i) => (
+                            <span
+                                key={i}
+                                className="px-2 py-0.5 text-[10px] font-mono text-white/50 bg-white/[0.03] border border-white/[0.06] rounded-md group-hover:text-white/70 group-hover:border-white/[0.1] transition-colors duration-300"
+                            >
+                                {tech}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </motion.a>
+    );
 }
 
 export default Portfolio;

@@ -11,10 +11,13 @@ module.exports = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
-			fontFamily: {
+      fontFamily: {
         merriweather: ["Merriweather", "serif"],
         poppins: ["Poppins", "sans-serif"],
-			},
+      },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+      },
     },
   },
   plugins: [],

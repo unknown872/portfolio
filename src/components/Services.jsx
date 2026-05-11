@@ -1,149 +1,161 @@
-import React, { useEffect } from 'react'
-import { FaLaptopCode } from 'react-icons/fa';
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { FaLaptopCode } from "react-icons/fa";
 import { TbDeviceMobileCode } from "react-icons/tb";
 import { MdOutlineScreenSearchDesktop } from "react-icons/md";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import { useI18n } from '../../locales';
+import { FiArrowUpRight } from "react-icons/fi";
+import { useTranslations } from "next-intl";
 
 function Services() {
-    const t = useI18n();
+    const t = useTranslations("services");
+    const tCommon = useTranslations("common");
+    const sectionRef = useRef(null);
+    const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
-    useEffect(() => {
-        AOS.init({
-            duration: 800,
-            once: true,
-            offset: 100
-        });
-    }, []);
-
-    const services = [
+    const SERVICES = [
         {
             icon: FaLaptopCode,
-            title: t("services.web.webDev.title"),
-            description: t("services.web.webDev.description"),
-            gradient: "from-blue-500 to-purple-600",
-            delay: 0
+            number: "01",
+            title: t("webDev.title"),
+            description: t("webDev.description"),
+            accent: "cyan",
         },
         {
             icon: TbDeviceMobileCode,
-            title: t("services.web.mobileDev.title"),
-            description: t("services.web.mobileDev.description"),
-            gradient: "from-purple-500 to-pink-600",
-            delay: 200
+            number: "02",
+            title: t("mobileDev.title"),
+            description: t("mobileDev.description"),
+            accent: "violet",
         },
         {
             icon: MdOutlineScreenSearchDesktop,
-            title: t("services.web.optimisation.title"),
-            description: t("services.web.optimisation.description"),
-            gradient: "from-pink-500 to-red-500",
-            delay: 400
-        }
+            number: "03",
+            title: t("optimization.title"),
+            description: t("optimization.description"),
+            accent: "cyan",
+        },
     ];
 
     return (
-        <section id="services" className='py-20 w-full min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 relative overflow-hidden'>
-            {/* Éléments décoratifs de fond */}
-            <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-400/10 rounded-full blur-3xl"></div>
-                <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-400/10 rounded-full blur-3xl"></div>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-pink-400/5 rounded-full blur-3xl"></div>
-            </div>
+        <section id="services" ref={sectionRef} className="relative w-full py-24 md:py-32 bg-[#0a0a0f] overflow-hidden">
+            <div
+                className="absolute inset-0 opacity-[0.08]"
+                style={{
+                    backgroundImage: `
+                        linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)
+                    `,
+                    backgroundSize: "80px 80px",
+                    maskImage: "radial-gradient(ellipse 60% 50% at 50% 50%, black 30%, transparent 80%)",
+                    WebkitMaskImage: "radial-gradient(ellipse 60% 50% at 50% 50%, black 30%, transparent 80%)",
+                }}
+            />
 
-            <div className='container mx-auto px-6 relative z-10'>
-                {/* Titre de section */}
-                <div className='text-center mb-16'>
-                    <div data-aos="fade-up" className="inline-block">
-                        <span className='text-sm font-semibold text-blue-600 uppercase tracking-wider mb-2 block'>
-                            {t('services.banner')}
+            <div
+                className="absolute top-1/2 -left-32 w-[400px] h-[400px] rounded-full blur-[120px] pointer-events-none"
+                style={{ background: "radial-gradient(circle, rgba(34,211,238,0.06), transparent 70%)" }}
+            />
+
+            <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-16">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.6 }}
+                    className="text-center mb-16 md:mb-20"
+                >
+                    <div className="inline-flex items-center gap-2 mb-5">
+                        <span className="h-px w-8 bg-cyan-400/50" />
+                        <span className="text-[10px] md:text-[11px] font-mono font-semibold text-cyan-400 uppercase tracking-[0.25em]">
+                            {t("banner")}
                         </span>
-                        <h2 className='text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4'>
-                            {t("services.title")}
-                        </h2>
-                        <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
+                        <span className="h-px w-8 bg-cyan-400/50" />
                     </div>
-                </div>
 
-                {/* Version Desktop - Layout en grille moderne */}
-                <div className='hidden md:block'>
-                    <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto'>
-                        {services.map((service, index) => {
-                            const IconComponent = service.icon;
-                            return (
-                                <div
-                                    key={index}
-                                    data-aos="fade-up"
-                                    data-aos-delay={service.delay}
-                                    className='group relative'
-                                >
-                                    {/* Card principale */}
-                                    <div className='bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/20 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 h-full'>
-                                        {/* Icône avec fond dégradé */}
-                                        <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                                            <IconComponent className='text-2xl text-white' />
-                                        </div>
-                                        
-                                        {/* Contenu */}
-                                        <h3 className='text-xl font-bold text-gray-800 mb-4 group-hover:text-blue-600 transition-colors duration-300'>
-                                            {service.title}
-                                        </h3>
-                                        <p className='text-gray-600 leading-relaxed text-sm'>
-                                            {service.description}
-                                        </p>
+                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-5">
+                        <span className="bg-gradient-to-br from-white via-white to-white/60 bg-clip-text text-transparent">
+                            {t("title")}
+                        </span>
+                    </h2>
 
-                                        {/* Effet de survol */}
-                                        <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}></div>
-                                    </div>
+                    <p className="text-white/50 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+                        {t("subtitle")}
+                    </p>
+                </motion.div>
 
-                                    {/* Indicateur de connexion */}
-                                    {index < services.length - 1 && (
-                                        <div className='hidden xl:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-blue-300 to-purple-300'></div>
-                                    )}
-                                </div>
-                            );
-                        })}
-                    </div>
-                </div>
-
-                {/* Version Mobile - Layout en colonne avec timeline */}
-                <div className='block md:hidden'>
-                    <div className='relative'>
-                        {/* Timeline line */}
-                        <div className="absolute left-8 top-0 w-0.5 h-full bg-gradient-to-b from-blue-400 via-purple-400 to-pink-400"></div>
-                        
-                        <div className='space-y-12'>
-                            {services.map((service, index) => {
-                                const IconComponent = service.icon;
-                                return (
-                                    <div
-                                        key={index}
-                                        data-aos="fade-left"
-                                        data-aos-delay={service.delay}
-                                        className='relative flex items-start space-x-6'
-                                    >
-                                        {/* Timeline dot avec icône */}
-                                        <div className={`relative flex-shrink-0 w-16 h-16 rounded-full bg-gradient-to-br ${service.gradient} flex items-center justify-center shadow-lg z-10`}>
-                                            <IconComponent className='text-xl text-white' />
-                                        </div>
-
-                                        {/* Contenu de la card */}
-                                        <div className='flex-1 bg-white/70 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-white/20 ml-2'>
-                                            <h3 className='text-lg font-bold text-gray-800 mb-3'>
-                                                {service.title}
-                                            </h3>
-                                            <p className='text-gray-600 text-sm leading-relaxed'>
-                                                {service.description}
-                                            </p>
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    {SERVICES.map((service, index) => (
+                        <ServiceCard
+                            key={index}
+                            service={service}
+                            index={index}
+                            isInView={isInView}
+                            learnMoreLabel={tCommon("learnMore")}
+                        />
+                    ))}
                 </div>
             </div>
         </section>
-    )
+    );
 }
 
-export default Services
+function ServiceCard({ service, index, isInView, learnMoreLabel }) {
+    const Icon = service.icon;
+    const cardRef = useRef(null);
+    const accentColor = service.accent === "cyan" ? "34,211,238" : "139,92,246";
+
+    const handleMouseMove = (e) => {
+        if (!cardRef.current) return;
+        const rect = cardRef.current.getBoundingClientRect();
+        cardRef.current.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+        cardRef.current.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+    };
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: index * 0.12, ease: [0.23, 1, 0.32, 1] }}
+            className="group h-full"
+        >
+            <div
+                ref={cardRef}
+                onMouseMove={handleMouseMove}
+                className="relative h-full p-7 md:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-white/[0.12] transition-colors duration-500 overflow-hidden"
+            >
+                <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    style={{
+                        background: `radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), rgba(${accentColor}, 0.08), transparent 40%)`,
+                    }}
+                />
+
+                <div className="relative z-10">
+                    <div className="flex items-start justify-between mb-8">
+                        <div className="relative w-12 h-12 rounded-xl flex items-center justify-center bg-white/[0.03] border border-white/[0.08] group-hover:scale-110 transition-transform duration-500 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+                            <div
+                                className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500"
+                                style={{ background: `rgba(${accentColor}, 0.3)` }}
+                            />
+                            <Icon className="relative w-5 h-5 transition-colors duration-500" style={{ color: `rgb(${accentColor})` }} />
+                        </div>
+                    </div>
+
+                    <h3 className="text-xl md:text-2xl font-semibold text-white mb-4 leading-tight tracking-tight">
+                        {service.title}
+                    </h3>
+
+                    <p className="text-sm md:text-[15px] text-white/55 leading-relaxed mb-8">
+                        {service.description}
+                    </p>
+
+                    <div className="flex items-center gap-2 text-[11px] font-mono uppercase tracking-wider text-white/40 group-hover:text-white/80 transition-colors duration-300">
+                        <span>{learnMoreLabel}</span>
+                        <FiArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </div>
+                </div>
+            </div>
+        </motion.div>
+    );
+}
+
+export default Services;

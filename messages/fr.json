@@ -1,0 +1,127 @@
+{
+    "common": {
+        "language": "Langue",
+        "navigation": "Navigation",
+        "scroll": "Scroll",
+        "top": "Top",
+        "learnMore": "En savoir plus",
+        "loading": "Chargement..."
+    },
+
+    "header": {
+        "nav": {
+            "services": "Services",
+            "skills": "Technologies",
+            "portfolio": "Portfolio",
+            "contact": "Contact"
+        }
+    },
+
+    "footer": {
+        "rights": "Tous droits réservés.",
+        "builtWith": "built with"
+    },
+
+    "accueil": {
+        "available": "Disponible pour de nouveaux projets",
+        "greeting": "Bonjour, je suis Youssou Traore",
+        "subtitle": "Je conçois et développe des applications modernes, performantes et accessibles, en transformant vos idées en expériences digitales abouties.",
+        "techStack": "Tech Stack",
+        "contact": "Me contacter",
+        "download": "Télécharger mon CV",
+        "roles": {
+            "fullstack": "Développeur Full-Stack",
+            "frontend": "Développeur Frontend",
+            "backend": "Développeur Backend",
+            "specialist": "Développeur Mobile"
+        }
+    },
+
+    "services": {
+        "banner": "Ce que je propose",
+        "title": "Mes Services",
+        "subtitle": "Des solutions sur mesure pour donner vie à vos projets digitaux, du prototype au déploiement.",
+        "webDev": {
+            "title": "Développement Web",
+            "description": "Création de sites et applications web modernes, performants et responsives avec React, Next.js et les dernières technologies."
+        },
+        "mobileDev": {
+            "title": "Développement Mobile",
+            "description": "Applications mobiles cross-platform avec React Native, offrant une expérience utilisateur fluide sur iOS et Android."
+        },
+        "optimization": {
+            "title": "Optimisation & SEO",
+            "description": "Amélioration des performances, du référencement et de l'accessibilité pour maximiser la visibilité de votre site."
+        }
+    },
+
+    "technologies": {
+        "banner": "Mon Stack Technique",
+        "title": "Technologies maîtrisées",
+        "subtitle": "Un écosystème d'outils modernes que j'utilise au quotidien pour construire des produits robustes et évolutifs.",
+        "loaded": "technologies chargées depuis",
+        "featured": "★ Featured"
+    },
+
+    "portfolio": {
+        "banner": "Mes Réalisations",
+        "title": "Portfolio",
+        "subtitle": "Une sélection de projets sur lesquels j'ai eu le plaisir de travailler. Chaque ligne de code raconte une histoire.",
+        "displayed": "projets affichés",
+        "viewProject": "Voir le projet",
+        "showLess": "Voir moins",
+        "showMore": "Voir les {count} autres projets",
+        "allRepos": "Tous mes dépôts sur GitHub",
+        "projects": {
+            "cinetheque": "Ciné.thèque — Plateforme communautaire pour les cinéphiles",
+            "monvelo": "MonVélo — Plateforme e-commerce",
+            "senegal24": "Sénégal 24 — Magazine d'actualités",
+            "acls": "Africtivistes Citizen Lab",
+            "afcl": "Africtivistes Citizen Lab — V2",
+            "chatbot": "Chatbot Citizen Lab — Assistant IA",
+            "sylvie": "Sylvie — Boutique en ligne",
+            "uptech": "UpTechnologie — Site corporate",
+            "ibag": "iBag Couture — E-commerce mode",
+            "djamo": "Djamo — Landing page fintech",
+            "ichiraku": "Ichiraku — Landing restaurant",
+            "worldsFever": "World's Fever — Site événementiel"
+        }
+    },
+
+    "contact": {
+        "banner": "Restons en contact",
+        "title": "Travaillons ensemble",
+        "subtitle": "Une idée de projet ? Une question ? N'hésitez pas à me contacter, je vous réponds sous 24h.",
+        "cards": {
+            "email": "Email",
+            "emailHint": "Cliquez pour copier",
+            "copied": "Copié !",
+            "whatsapp": "WhatsApp",
+            "whatsappHint": "Réponse rapide garantie",
+            "location": "Localisation",
+            "locationValue": "Dakar, Sénégal",
+            "locationHint": "Disponible pour du télétravail (international)",
+            "social": "Réseaux"
+        },
+        "form": {
+            "header": "new Message",
+            "labels": {
+                "name": "name",
+                "email": "email",
+                "subject": "subject",
+                "message": "message"
+            },
+            "placeholders": {
+                "name": "Votre nom",
+                "email": "vous@exemple.com",
+                "subject": "Sujet de votre message",
+                "message": "Parlez-moi de votre projet..."
+            },
+            "requiredFields": "* Champs obligatoires",
+            "submit": "Envoyer le message",
+            "submitting": "Envoi en cours...",
+            "success": "Message envoyé ! Je vous réponds bientôt.",
+            "error": "Erreur lors de l'envoi. Veuillez réessayer."
+        }
+    }
+}

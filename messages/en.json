@@ -1,0 +1,127 @@
+{
+    "common": {
+        "language": "Language",
+        "navigation": "Navigation",
+        "scroll": "Scroll",
+        "top": "Top",
+        "learnMore": "Learn more",
+        "loading": "Loading..."
+    },
+
+    "header": {
+        "nav": {
+            "services": "Services",
+            "skills": "Technologies",
+            "portfolio": "Portfolio",
+            "contact": "Contact"
+        }
+    },
+
+    "footer": {
+        "rights": "All rights reserved.",
+        "builtWith": "built with"
+    },
+
+    "accueil": {
+        "available": "Available for new projects",
+        "greeting": "Hi, I'm Youssou Traore",
+        "subtitle": "I design and build modern, high-performance and accessible applications, turning your ideas into polished digital experiences.",
+        "techStack": "Tech Stack",
+        "contact": "Get in touch",
+        "download": "Download my CV",
+        "roles": {
+            "fullstack": "Full-Stack Developer",
+            "frontend": "Frontend Developer",
+            "backend": "Backend Developer",
+            "specialist": "Mobile Developer"
+        }
+    },
+
+    "services": {
+        "banner": "What I offer",
+        "title": "My Services",
+        "subtitle": "Tailor-made solutions to bring your digital projects to life, from prototype to deployment.",
+        "webDev": {
+            "title": "Web Development",
+            "description": "Building modern, performant and responsive websites and web apps with React, Next.js and the latest technologies."
+        },
+        "mobileDev": {
+            "title": "Mobile Development",
+            "description": "Cross-platform mobile apps with React Native, delivering a smooth user experience on both iOS and Android."
+        },
+        "optimization": {
+            "title": "Optimization & SEO",
+            "description": "Improving performance, search ranking and accessibility to maximize your site's visibility."
+        }
+    },
+
+    "technologies": {
+        "banner": "My Tech Stack",
+        "title": "Technologies I master",
+        "subtitle": "A modern toolkit I use daily to build robust and scalable products.",
+        "loaded": "technologies loaded from",
+        "featured": "★ Featured"
+    },
+
+    "portfolio": {
+        "banner": "My Work",
+        "title": "Portfolio",
+        "subtitle": "A selection of projects I had the pleasure to work on. Every line of code tells a story.",
+        "displayed": "projects displayed",
+        "viewProject": "View project",
+        "showLess": "Show less",
+        "showMore": "Show {count} more projects",
+        "allRepos": "All my repositories on GitHub",
+        "projects": {
+            "cinetheque": "Ciné.thèque — Community platform for film enthusiasts",
+            "monvelo": "MonVélo — E-commerce platform",
+            "senegal24": "Sénégal 24 — News magazine",
+            "acls": "Africtivistes Citizen Lab",
+            "afcl": "Africtivistes Citizen Lab — V2",
+            "chatbot": "Chatbot Citizen Lab — AI Assistant",
+            "sylvie": "Sylvie — Online store",
+            "uptech": "UpTechnologie — Corporate website",
+            "ibag": "iBag Couture — Fashion e-commerce",
+            "djamo": "Djamo — Fintech landing page",
+            "ichiraku": "Ichiraku — Restaurant landing",
+            "worldsFever": "World's Fever — Event website"
+        }
+    },
+
+    "contact": {
+        "banner": "Let's stay in touch",
+        "title": "Let's work together",
+        "subtitle": "Got a project idea? A question? Feel free to reach out, I respond within 24h.",
+        "cards": {
+            "email": "Email",
+            "emailHint": "Click to copy",
+            "copied": "Copied!",
+            "whatsapp": "WhatsApp",
+            "whatsappHint": "Fast response guaranteed",
+            "location": "Location",
+            "locationValue": "Dakar, Senegal",
+            "locationHint": "Available for remote work (worldwide)",
+            "social": "Social"
+        },
+        "form": {
+            "header": "new Message",
+            "labels": {
+                "name": "name",
+                "email": "email",
+                "subject": "subject",
+                "message": "message"
+            },
+            "placeholders": {
+                "name": "Your name",
+                "email": "you@example.com",
+                "subject": "Subject of your message",
+                "message": "Tell me about your project..."
+            },
+            "requiredFields": "* Required fields",
+            "submit": "Send message",
+            "submitting": "Sending...",
+            "success": "Message sent! I'll get back to you soon.",
+            "error": "Error sending message. Please try again."
+        }
+    }
+}

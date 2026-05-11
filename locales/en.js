@@ -3,6 +3,9 @@ import Technologies from "@/components/Technologies";
 // locales/en.ts
 export default {
   accueil: {
+    available: "Disponible pour de nouveaux projets",
+     title: "Full-Stack Developer", // ou récupérez de votre i18n
+     techStack: "Tech Stack",
     presentation: "Hi there 🖐, I'm Youssou!",
     subtitle:
       "Passionate web developer, creating modern and efficient experiences.",

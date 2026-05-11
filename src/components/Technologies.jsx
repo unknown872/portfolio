@@ -1,337 +1,254 @@
-import React, { useState, useEffect } from 'react';
-import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt, FaNodeJs, FaNpm, FaDatabase, FaNode } from 'react-icons/fa';
-import { SiTypescript, SiAstro, SiNextdotjs, SiJquery, SiTailwindcss, SiFigma, SiCanva, SiPostgresql, SiPrisma, SiMongodb, SiMysql, SiDocker } from 'react-icons/si';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import { useI18n } from '../../locales';
+import React, { useState, useRef } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import {
+    FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt, FaNodeJs, FaNpm, FaDatabase, FaNode,
+} from "react-icons/fa";
+import {
+    SiTypescript, SiAstro, SiNextdotjs, SiJquery, SiTailwindcss, SiFigma,
+    SiCanva, SiPostgresql, SiPrisma, SiMongodb, SiMysql, SiDocker,
+} from "react-icons/si";
+import { useTranslations } from "next-intl";
+import clsx from "clsx";
 
-const techCategories = {
-    all: [
-        { icon: <FaHtml5 className="text-orange-500" />, name: "HTML", level: 90, color: "orange" },
-        { icon: <FaCss3Alt className="text-blue-500" />, name: "CSS", level: 85, color: "blue" },
-        { icon: <FaJs className="text-yellow-500" />, name: "JavaScript", level: 88, color: "yellow" },
-        { icon: <SiTypescript className="text-blue-600" />, name: "TypeScript", level: 82, color: "blue" },
-        { icon: <FaReact className="text-blue-400" />, name: "React", level: 90, color: "cyan" },
-        { icon: <SiNextdotjs className="text-black dark:text-white" />, name: "Next.js", level: 85, color: "gray" },
-        { icon: <SiAstro className="text-pink-600" />, name: "Astro", level: 85, color: "purple" },
-        { icon: <SiJquery className="text-blue-500" />, name: "jQuery", level: 75, color: "blue" },
-        { icon: <SiTailwindcss className="text-teal-500" />, name: "TailwindCSS", level: 92, color: "teal" },
-        { icon: <FaNode className="text-green-500" />, name: "Node.js", level: 85, color: "green" },
-        { icon: <FaNodeJs className="text-green-500" />, name: "Express.js", level: 80, color: "green" },
-        { icon: <FaDatabase className="text-green-500" />, name: "SQL", level: 78, color: "green" },
-        { icon: <SiPostgresql className="text-blue-500" />, name: "PostgreSQL", level: 82, color: "blue" },
-        { icon: <SiMysql className="text-blue-500" />, name: "MySQL", level: 80, color: "blue" },
-        { icon: <SiMongodb className="text-green-500" />, name: "MongoDB", level: 75, color: "green" },
-        { icon: <SiPrisma className="text-blue-500" />, name: "Prisma", level: 85, color: "blue" },
-        { icon: <FaReact className="text-blue-400" />, name: "React Native", level: 80, color: "cyan" },
-        { icon: <FaGitAlt className="text-red-500" />, name: "Git", level: 88, color: "red" },
-        { icon: <FaNpm className="text-red-500" />, name: "NPM", level: 85, color: "red" },
-        { icon: <SiFigma className="text-purple-500" />, name: "Figma", level: 80, color: "purple" },
-        { icon: <SiCanva className="text-blue-400" />, name: "Canva", level: 75, color: "cyan" },
-        { icon: <SiDocker className="text-blue-400" />, name: "Docker", level: 75, color: "cyan" }
-    ],
-    frontend: [
-        { icon: <FaHtml5 className="text-orange-500" />, name: "HTML", level: 90, color: "orange" },
-        { icon: <FaCss3Alt className="text-blue-500" />, name: "CSS", level: 85, color: "blue" },
-        { icon: <FaJs className="text-yellow-500" />, name: "JavaScript", level: 88, color: "yellow" },
-        { icon: <SiTypescript className="text-blue-600" />, name: "TypeScript", level: 82, color: "blue" },
-        { icon: <FaReact className="text-blue-400" />, name: "React", level: 90, color: "cyan" },
-        { icon: <SiNextdotjs className="text-black dark:text-white" />, name: "Next.js", level: 85, color: "gray" },
-        { icon: <SiJquery className="text-blue-500" />, name: "jQuery", level: 75, color: "blue" },
-        { icon: <SiTailwindcss className="text-teal-500" />, name: "TailwindCSS", level: 92, color: "teal" },
-        { icon: <SiAstro className="text-pink-600" />, name: "Astro", level: 85, color: "purple" },
-    ],
-    mobile: [
-        { icon: <FaReact className="text-blue-400" />, name: "React Native", level: 80, color: "cyan" },
-    ],
-    backend: [
-        { icon: <FaNode className="text-green-500" />, name: "Node.js", level: 85, color: "green" },
-        { icon: <FaNodeJs className="text-green-500" />, name: "Express.js", level: 80, color: "green" },
-        { icon: <FaDatabase className="text-green-500" />, name: "SQL", level: 78, color: "green" },
-        { icon: <SiPostgresql className="text-blue-500" />, name: "PostgreSQL", level: 82, color: "blue" },
-        { icon: <SiMysql className="text-blue-500" />, name: "MySQL", level: 80, color: "blue" },
-        { icon: <SiMongodb className="text-green-500" />, name: "MongoDB", level: 75, color: "green" },
-        { icon: <SiPrisma className="text-blue-500" />, name: "Prisma", level: 85, color: "blue" },
-    ],
-    tools: [
-        { icon: <FaGitAlt className="text-red-500" />, name: "Git", level: 88, color: "red" },
-        { icon: <FaNpm className="text-red-500" />, name: "NPM", level: 85, color: "red" },
-        { icon: <SiFigma className="text-purple-500" />, name: "Figma", level: 80, color: "purple" },
-        { icon: <SiCanva className="text-blue-400" />, name: "Canva", level: 75, color: "cyan" },
-        { icon: <SiDocker className="text-blue-400" />, name: "Docker", level: 75, color: "cyan" }
-    ],
-};
+const allTech = [
+    { icon: FaHtml5, name: "HTML", category: "frontend", color: "#e34c26" },
+    { icon: FaCss3Alt, name: "CSS", category: "frontend", color: "#1572b6" },
+    { icon: FaJs, name: "JavaScript", category: "frontend", color: "#f7df1e", featured: true },
+    { icon: SiTypescript, name: "TypeScript", category: "frontend", color: "#3178c6", featured: true },
+    { icon: FaReact, name: "React", category: "frontend", color: "#61dafb", featured: true },
+    { icon: SiNextdotjs, name: "Next.js", category: "frontend", color: "#ffffff", featured: true },
+    { icon: SiAstro, name: "Astro", category: "frontend", color: "#ff5d01" },
+    { icon: SiJquery, name: "jQuery", category: "frontend", color: "#0769ad" },
+    { icon: SiTailwindcss, name: "TailwindCSS", category: "frontend", color: "#06b6d4", featured: true },
+    { icon: FaReact, name: "React Native", category: "mobile", color: "#61dafb" },
+    { icon: FaNode, name: "Node.js", category: "backend", color: "#68a063", featured: true },
+    { icon: FaNodeJs, name: "Express.js", category: "backend", color: "#68a063" },
+    { icon: FaDatabase, name: "SQL", category: "backend", color: "#4479a1" },
+    { icon: SiPostgresql, name: "PostgreSQL", category: "backend", color: "#336791" },
+    { icon: SiMysql, name: "MySQL", category: "backend", color: "#4479a1" },
+    { icon: SiMongodb, name: "MongoDB", category: "backend", color: "#47a248" },
+    { icon: SiPrisma, name: "Prisma", category: "backend", color: "#2d3748" },
+    { icon: FaGitAlt, name: "Git", category: "tools", color: "#f05033" },
+    { icon: FaNpm, name: "NPM", category: "tools", color: "#cb3837" },
+    { icon: SiFigma, name: "Figma", category: "tools", color: "#a259ff" },
+    { icon: SiCanva, name: "Canva", category: "tools", color: "#00c4cc" },
+    { icon: SiDocker, name: "Docker", category: "tools", color: "#2496ed" },
+];
 
-const categoryTitles = {
-    all: "Toutes",
-    frontend: "Frontend",
-    mobile: "Mobile",
-    backend: "Backend",
-    tools: "Outils"
-};
-
-// Couleur de la barre de progression selon la tech
-const getProgressGradient = (color) => {
-    const gradients = {
-        orange: 'from-orange-400 to-orange-600',
-        blue: 'from-blue-400 to-blue-600',
-        yellow: 'from-yellow-400 to-amber-500',
-        cyan: 'from-cyan-400 to-blue-500',
-        gray: 'from-gray-400 to-gray-600',
-        teal: 'from-teal-400 to-teal-600',
-        green: 'from-green-400 to-emerald-600',
-        red: 'from-red-400 to-red-600',
-        purple: 'from-purple-400 to-purple-600',
-    };
-    return gradients[color] || gradients.blue;
-};
-
-// Couleur du ring glow au hover
-const getGlowColor = (color) => {
-    const glows = {
-        orange: 'rgba(249, 115, 22, 0.25)',
-        blue: 'rgba(59, 130, 246, 0.25)',
-        yellow: 'rgba(234, 179, 8, 0.25)',
-        cyan: 'rgba(34, 211, 238, 0.25)',
-        gray: 'rgba(107, 114, 128, 0.2)',
-        teal: 'rgba(20, 184, 166, 0.25)',
-        green: 'rgba(34, 197, 94, 0.25)',
-        red: 'rgba(239, 68, 68, 0.25)',
-        purple: 'rgba(168, 85, 247, 0.25)',
-    };
-    return glows[color] || glows.blue;
-};
+// Les noms de fichiers restent en anglais (volontaire pour l'effet "code")
+const CATEGORIES = [
+    { id: "all", file: "Stack" },
+    { id: "frontend", file: "frontend" },
+    { id: "backend", file: "backend" },
+    { id: "mobile", file: "mobile" },
+    { id: "tools", file: "tools" },
+];
 
 function Technologies() {
-    const t = useI18n();
-    categoryTitles.all = t("technologies.all");
-    const [activeCategory, setActiveCategory] = useState('all');
-    const [hoveredTech, setHoveredTech] = useState(null);
-    const [animatedLevels, setAnimatedLevels] = useState(false);
+    const t = useTranslations("technologies");
+    const [activeCategory, setActiveCategory] = useState("all");
+    const sectionRef = useRef(null);
+    const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
-    useEffect(() => {
-        AOS.init({
-            duration: 800,
-            once: true,
-            offset: 100
-        });
-    }, []);
-
-    // Relancer l'animation des barres à chaque changement de catégorie
-    useEffect(() => {
-        setAnimatedLevels(false);
-        const timer = setTimeout(() => setAnimatedLevels(true), 100);
-        return () => clearTimeout(timer);
-    }, [activeCategory]);
+    const filteredTech =
+        activeCategory === "all" ? allTech : allTech.filter((tech) => tech.category === activeCategory);
 
     return (
-        <section className='py-20 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 relative overflow-hidden' id='skills'>
-            {/* Éléments décoratifs de fond — INCHANGÉS */}
-            <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-20 right-10 w-72 h-72 bg-gradient-to-br from-pink-400/10 to-orange-400/10 rounded-full blur-3xl"></div>
-                <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-gradient-to-br from-teal-400/5 to-cyan-400/5 rounded-full blur-3xl"></div>
+        <section id="skills" ref={sectionRef} className="relative w-full py-24 md:py-32 bg-[#0a0a0f] overflow-hidden">
+            <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-[0.04]">
+                <Marquee techs={allTech} speed={60} direction="left" rowY="20%" />
+                <Marquee techs={[...allTech].reverse()} speed={80} direction="right" rowY="55%" />
+                <Marquee techs={allTech} speed={70} direction="left" rowY="85%" />
             </div>
 
-            <div className='container mx-auto px-6 relative z-10'>
-                {/* En-tête de section — INCHANGÉ */}
-                <div className='text-center mb-16' data-aos="fade-up">
-                    <span className='text-sm font-semibold text-blue-600 uppercase tracking-wider mb-2 block'>
-                        {t("technologies.banner")}
-                    </span>
-                    <h2 className='text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4'>
-                        {t('technologies.title')}
+            <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_70%_60%_at_center,transparent_30%,#0a0a0f_85%)]" />
+
+            <div
+                className="absolute top-1/3 -right-32 w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none"
+                style={{ background: "radial-gradient(circle, rgba(139,92,246,0.08), transparent 70%)" }}
+            />
+            <div
+                className="absolute bottom-1/3 -left-32 w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none"
+                style={{ background: "radial-gradient(circle, rgba(34,211,238,0.06), transparent 70%)" }}
+            />
+
+            <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-16">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.6 }}
+                    className="text-center mb-12"
+                >
+                    <div className="inline-flex items-center gap-2 mb-5">
+                        <span className="h-px w-8 bg-violet-400/50" />
+                        <span className="text-[10px] md:text-[11px] font-mono font-semibold text-violet-400 uppercase tracking-[0.25em]">
+                            {t("banner")}
+                        </span>
+                        <span className="h-px w-8 bg-violet-400/50" />
+                    </div>
+
+                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-5">
+                        <span className="bg-gradient-to-br from-white via-white to-white/60 bg-clip-text text-transparent">
+                            {t("title")}
+                        </span>
                     </h2>
-                    <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full mb-6"></div>
-                    <p className="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
-                        {t("technologies.subtitle")}
+
+                    <p className="text-white/50 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+                        {t("subtitle")}
                     </p>
-                </div>
+                </motion.div>
 
-                {/* ═══════════════════════════════════════════
-                    ONGLETS RETOUCHÉS — Glassmorphism pill bar
-                    ═══════════════════════════════════════════ */}
-                <div className="flex justify-center mb-14" data-aos="fade-up" data-aos-delay="200">
-                    <div className="inline-flex flex-wrap justify-center gap-2 p-2 bg-white/30 backdrop-blur-xl border border-white/40 rounded-2xl shadow-lg">
-                        {Object.keys(techCategories).map((category) => (
-                            <button
-                                key={category}
-                                onClick={() => setActiveCategory(category)}
-                                className="relative px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-400 outline-none"
-                                style={{
-                                    background: activeCategory === category
-                                        ? 'linear-gradient(135deg, #2563eb, #7c3aed)'
-                                        : 'transparent',
-                                    color: activeCategory === category ? '#fff' : '#6b7280',
-                                    boxShadow: activeCategory === category
-                                        ? '0 4px 15px -3px rgba(99, 102, 241, 0.4)'
-                                        : 'none',
-                                    transform: activeCategory === category ? 'scale(1.02)' : 'scale(1)',
-                                }}
-                            >
-                                {categoryTitles[category]}
-                            </button>
-                        ))}
-                    </div>
-                </div>
-
-                {/* ═══════════════════════════════════════════
-                    GRILLE RETOUCHÉE — Glassmorphism tech cards
-                    ═══════════════════════════════════════════ */}
-                <div className="max-w-6xl mx-auto">
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5">
-                        {techCategories[activeCategory].map((tech, index) => {
-                            const isHovered = hoveredTech === `${activeCategory}-${index}`;
-                            return (
-                                <div
-                                    key={`${activeCategory}-${index}`}
-                                    data-aos="fade-up"
-                                    data-aos-delay={index * 40}
-                                    className="relative group"
-                                    onMouseEnter={() => setHoveredTech(`${activeCategory}-${index}`)}
-                                    onMouseLeave={() => setHoveredTech(null)}
-                                >
-                                    {/* Tooltip niveau */}
-                                    <div
-                                        className="absolute -top-11 left-1/2 z-20 flex flex-col items-center pointer-events-none transition-all duration-300"
-                                        style={{
-                                            transform: `translateX(-50%) ${isHovered ? 'translateY(0)' : 'translateY(6px)'}`,
-                                            opacity: isHovered ? 1 : 0,
-                                        }}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    className="mb-10"
+                >
+                    <div className="max-w-3xl mx-auto rounded-t-xl bg-white/[0.02] border border-white/[0.06] border-b-0 overflow-hidden">
+                        <div className="flex items-center overflow-x-auto scrollbar-hide">
+                            {CATEGORIES.map((cat) => {
+                                const isActive = activeCategory === cat.id;
+                                return (
+                                    <button
+                                        key={cat.id}
+                                        onClick={() => setActiveCategory(cat.id)}
+                                        className={clsx(
+                                            "relative flex items-center gap-2 px-8 py-4 text-[11px] font-mono transition-colors duration-200 whitespace-nowrap border-r border-white/[0.06]",
+                                            isActive ? "text-white bg-white/[0.04]" : "text-white/40 hover:text-white/70 hover:bg-white/[0.02]"
+                                        )}
                                     >
-                                        <div className="px-3 py-1.5 bg-gray-900/90 backdrop-blur-md text-white text-xs font-bold rounded-lg shadow-xl">
-                                            {tech.level}%
-                                        </div>
-                                        <div className="w-2 h-2 bg-gray-900/90 rotate-45 -mt-1"></div>
-                                    </div>
+                                        <span>{cat.file}</span>
 
-                                    {/* Card glassmorphism */}
-                                    <div
-                                        className="relative overflow-hidden rounded-2xl cursor-pointer flex flex-col items-center justify-center h-36 p-4 transition-all duration-500"
-                                        style={{
-                                            background: isHovered
-                                                ? 'rgba(255, 255, 255, 0.65)'
-                                                : 'rgba(255, 255, 255, 0.40)',
-                                            backdropFilter: 'blur(16px)',
-                                            WebkitBackdropFilter: 'blur(16px)',
-                                            border: `1px solid ${isHovered ? 'rgba(255, 255, 255, 0.6)' : 'rgba(255, 255, 255, 0.3)'}`,
-                                            boxShadow: isHovered
-                                                ? `0 20px 40px -12px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.5) inset, 0 0 30px ${getGlowColor(tech.color)}`
-                                                : '0 8px 24px -8px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(255, 255, 255, 0.4) inset',
-                                            transform: isHovered ? 'translateY(-8px) scale(1.04)' : 'translateY(0) scale(1)',
-                                        }}
-                                    >
-                                        {/* Reflet lumineux en haut */}
-                                        <div
-                                            className="absolute top-0 left-0 right-0 h-1/2 rounded-t-2xl pointer-events-none"
-                                            style={{
-                                                background: 'linear-gradient(180deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 100%)',
-                                            }}
-                                        />
-
-                                        {/* Icône */}
-                                        <div
-                                            className="text-4xl mb-3 relative z-10 transition-all duration-500"
-                                            style={{
-                                                transform: isHovered ? 'scale(1.2) translateY(-2px)' : 'scale(1) translateY(0)',
-                                                filter: isHovered ? 'drop-shadow(0 4px 8px rgba(0,0,0,0.15))' : 'none',
-                                            }}
-                                        >
-                                            {tech.icon}
-                                        </div>
-
-                                        {/* Nom */}
-                                        <span
-                                            className="text-xs font-semibold text-center leading-tight relative z-10 transition-colors duration-300"
-                                            style={{ color: isHovered ? '#1f2937' : '#4b5563' }}
-                                        >
-                                            {tech.name}
-                                        </span>
-
-                                        {/* Barre de progression glassmorphism */}
-                                        <div className="absolute bottom-3 left-3 right-3 z-10">
-                                            <div className="w-full h-1.5 bg-gray-200/60 rounded-full overflow-hidden backdrop-blur-sm">
-                                                <div
-                                                    className={`h-full rounded-full bg-gradient-to-r ${getProgressGradient(tech.color)} transition-all duration-1000 ease-out`}
-                                                    style={{
-                                                        width: animatedLevels ? `${tech.level}%` : '0%',
-                                                        transitionDelay: `${index * 50}ms`,
-                                                        boxShadow: isHovered ? `0 0 8px ${getGlowColor(tech.color)}` : 'none',
-                                                    }}
-                                                />
-                                            </div>
-                                        </div>
-
-                                        {/* Glow coloré en arrière-plan au hover */}
-                                        <div
-                                            className="absolute inset-0 rounded-2xl pointer-events-none transition-opacity duration-500"
-                                            style={{
-                                                background: `radial-gradient(circle at 50% 80%, ${getGlowColor(tech.color)}, transparent 70%)`,
-                                                opacity: isHovered ? 1 : 0,
-                                            }}
-                                        />
-                                    </div>
-                                </div>
-                            );
-                        })}
+                                        {isActive && (
+                                            <motion.span
+                                                layoutId="active-tab-indicator"
+                                                className="absolute bottom-0 left-0 right-0 h-px bg-cyan-400"
+                                                transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                                            />
+                                        )}
+                                    </button>
+                                );
+                            })}
+                            <div className="flex-1 border-b border-white/[0.06] self-stretch" />
+                        </div>
                     </div>
-                </div>
+                </motion.div>
 
-                {/* ═══════════════════════════════════════════
-                    STATISTIQUES RETOUCHÉES — Glassmorphism + compteurs
-                    ═══════════════════════════════════════════ */}
-                <div className="mt-16 text-center" data-aos="fade-up" data-aos-delay="400">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-5 max-w-4xl mx-auto">
-                        {[
-                            { value: "20+", label: "Technologies", gradient: "from-blue-500 to-blue-600" },
-                            { value: "2+", label: "Ans d'expérience", gradient: "from-purple-500 to-purple-600" },
-                            { value: "10+", label: "Projets réalisés", gradient: "from-pink-500 to-pink-600" },
-                            { value: "100%", label: "Satisfaction client", gradient: "from-teal-500 to-teal-600" },
-                        ].map((stat, i) => (
-                            <div
-                                key={i}
-                                className="group/stat relative rounded-2xl p-6 cursor-default transition-all duration-500"
-                                style={{
-                                    background: 'rgba(255, 255, 255, 0.45)',
-                                    backdropFilter: 'blur(16px)',
-                                    WebkitBackdropFilter: 'blur(16px)',
-                                    border: '1px solid rgba(255, 255, 255, 0.35)',
-                                    boxShadow: '0 8px 32px -8px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.4) inset',
-                                }}
-                                onMouseEnter={(e) => {
-                                    e.currentTarget.style.transform = 'translateY(-4px)';
-                                    e.currentTarget.style.boxShadow = '0 20px 40px -12px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.5) inset';
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.currentTarget.style.transform = 'translateY(0)';
-                                    e.currentTarget.style.boxShadow = '0 8px 32px -8px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.4) inset';
-                                }}
-                            >
-                                {/* Reflet */}
-                                <div
-                                    className="absolute top-0 left-0 right-0 h-1/2 rounded-t-2xl pointer-events-none"
-                                    style={{
-                                        background: 'linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 100%)',
-                                    }}
-                                />
-                                <div className={`text-3xl font-bold bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent mb-1 relative z-10`}>
-                                    {stat.value}
-                                </div>
-                                <div className="text-sm text-gray-600 relative z-10">
-                                    {stat.label}
-                                </div>
-
-                                {/* Ligne gradient en bas au hover */}
-                                <div
-                                    className={`absolute bottom-0 left-0 right-0 h-[2px] rounded-b-2xl bg-gradient-to-r ${stat.gradient} transition-all duration-500 opacity-0 group-hover/stat:opacity-100`}
-                                    style={{ transformOrigin: 'center' }}
-                                />
-                            </div>
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        key={activeCategory}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+                        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 auto-rows-[110px] md:auto-rows-[130px]"
+                    >
+                        {filteredTech.map((tech, index) => (
+                            <TechCard
+                                key={`${activeCategory}-${tech.name}`}
+                                tech={tech}
+                                index={index}
+                                featuredLabel={t("featured")}
+                            />
                         ))}
-                    </div>
-                </div>
+                    </motion.div>
+                </AnimatePresence>
             </div>
+
+            <style jsx>{`
+                .scrollbar-hide::-webkit-scrollbar { display: none; }
+                .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+            `}</style>
         </section>
+    );
+}
+
+function TechCard({ tech, index, featuredLabel }) {
+    const Icon = tech.icon;
+    const cardRef = useRef(null);
+    const isFeatured = tech.featured;
+
+    const handleMouseMove = (e) => {
+        if (!cardRef.current) return;
+        const rect = cardRef.current.getBoundingClientRect();
+        cardRef.current.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+        cardRef.current.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+    };
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4, delay: index * 0.04, ease: [0.23, 1, 0.32, 1] }}
+            className={clsx("group", isFeatured && "sm:col-span-2")}
+        >
+            <div
+                ref={cardRef}
+                onMouseMove={handleMouseMove}
+                className="relative w-full h-full p-4 md:p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-white/[0.15] transition-all duration-500 overflow-hidden flex flex-col"
+            >
+                <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    style={{
+                        background: `radial-gradient(250px circle at var(--mouse-x) var(--mouse-y), ${tech.color}15, transparent 60%)`,
+                    }}
+                />
+
+                {isFeatured ? (
+                    <div className="flex items-center gap-4 h-full">
+                        <div className="flex-shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-xl flex items-center justify-center bg-white/[0.03] border border-white/[0.08] group-hover:scale-110 transition-transform duration-500 relative">
+                            <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" style={{ background: `${tech.color}30` }} />
+                            <Icon className="relative w-6 h-6 md:w-7 md:h-7" style={{ color: tech.color }} />
+                        </div>
+                        <div className="flex flex-col gap-1 min-w-0">
+                            <span className="text-sm md:text-base font-semibold text-white truncate">{tech.name}</span>
+                            <span className="text-[9px] font-mono text-cyan-400/70 uppercase tracking-wider">{featuredLabel}</span>
+                        </div>
+                    </div>
+                ) : (
+                    <div className="flex flex-col items-center justify-center h-full gap-2">
+                        <div className="relative">
+                            <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 blur-lg transition-opacity duration-500" style={{ background: `${tech.color}40` }} />
+                            <Icon className="relative w-7 h-7 md:w-8 md:h-8 transition-transform duration-500 group-hover:scale-110" style={{ color: tech.color }} />
+                        </div>
+                        <span className="text-[11px] md:text-xs font-mono text-white/60 group-hover:text-white text-center transition-colors duration-300">
+                            {tech.name}
+                        </span>
+                    </div>
+                )}
+            </div>
+        </motion.div>
+    );
+}
+
+function Marquee({ techs, speed, direction, rowY }) {
+    const duplicated = [...techs, ...techs];
+
+    return (
+        <div
+            className="absolute left-0 right-0 flex gap-12 whitespace-nowrap"
+            style={{ top: rowY, animation: `marquee-${direction} ${speed}s linear infinite` }}
+        >
+            {duplicated.map((tech, i) => {
+                const Icon = tech.icon;
+                return (
+                    <div key={i} className="flex items-center gap-3 flex-shrink-0">
+                        <Icon className="w-8 h-8" style={{ color: tech.color }} />
+                        <span className="font-mono text-2xl text-white/60">{tech.name}</span>
+                    </div>
+                );
+            })}
+            <style jsx>{`
+                @keyframes marquee-left {
+                    0% { transform: translateX(0); }
+                    100% { transform: translateX(-50%); }
+                }
+                @keyframes marquee-right {
+                    0% { transform: translateX(-50%); }
+                    100% { transform: translateX(0); }
+                }
+            `}</style>
+        </div>
     );
 }
 
