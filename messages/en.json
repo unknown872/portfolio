@@ -73,6 +73,7 @@
         "showMore": "Show {count} more projects",
         "allRepos": "All my repositories on GitHub",
         "projects": {
+            "quran-app": "Quran App — Web application for Quran reading",
             "cinetheque": "Ciné.thèque — Community platform for film enthusiasts",
             "monvelo": "MonVélo — E-commerce platform",
             "senegal24": "Sénégal 24 — News magazine",
