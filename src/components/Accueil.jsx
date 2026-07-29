@@ -142,7 +142,7 @@ function Accueil() {
                         </motion.a>
 
                         <motion.a
-                            href="/001-Youssou-Traore.pdf"
+                            href="/Youssou-Traore-CV.pdf"
                             download
                             whileHover={{ y: -2 }}
                             whileTap={{ scale: 0.98 }}

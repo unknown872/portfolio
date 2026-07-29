@@ -5,8 +5,7 @@ import { useTranslations } from "next-intl";
 
 const SOCIAL_LINKS = [
     { href: "https://github.com/unknown872", icon: FiGithub, label: "GitHub" },
-    { href: "https://linkedin.com/in/votre-profil", icon: FiLinkedin, label: "LinkedIn" },
-    { href: "https://twitter.com/votre-handle", icon: FiTwitter, label: "Twitter" },
+    { href: "https://www.linkedin.com/in/youssou-traore-6696a0347", icon: FiLinkedin, label: "LinkedIn" },
     { href: "mailto:youssoutraore22@yahoo.com", icon: FiMail, label: "Email" },
 ];
 

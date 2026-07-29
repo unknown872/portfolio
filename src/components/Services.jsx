@@ -129,7 +129,7 @@ function ServiceCard({ service, index, isInView, learnMoreLabel }) {
                     }}
                 />
 
-                <div className="relative z-10">
+                <div className="relative z-10 cursor-default">
                     <div className="flex items-start justify-between mb-8">
                         <div className="relative w-12 h-12 rounded-xl flex items-center justify-center bg-white/[0.03] border border-white/[0.08] group-hover:scale-110 transition-transform duration-500 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
                             <div
@@ -147,11 +147,6 @@ function ServiceCard({ service, index, isInView, learnMoreLabel }) {
                     <p className="text-sm md:text-[15px] text-white/55 leading-relaxed mb-8">
                         {service.description}
                     </p>
-
-                    <div className="flex items-center gap-2 text-[11px] font-mono uppercase tracking-wider text-white/40 group-hover:text-white/80 transition-colors duration-300">
-                        <span>{learnMoreLabel}</span>
-                        <FiArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </div>
                 </div>
             </div>
         </motion.div>

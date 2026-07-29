@@ -10,11 +10,9 @@ import clsx from "clsx";
 import axios from "axios";
 
 const SOCIAL_LINKS = [
-    { icon: FaLinkedin, name: "LinkedIn", url: "https://linkedin.com/in/votre-profil" },
+    { icon: FaLinkedin, name: "LinkedIn", url: "https://www.linkedin.com/in/youssou-traore-6696a0347" },
     { icon: FaGithub, name: "GitHub", url: "https://github.com/unknown872" },
     { icon: FaWhatsapp, name: "WhatsApp", url: "https://wa.me/221770957560" },
-    { icon: FaInstagram, name: "Instagram", url: "https://instagram.com/votre-handle" },
-    { icon: FaTelegram, name: "Telegram", url: "https://t.me/votre-handle" },
 ];
 
 const EMAIL = "youssoutraore22@yahoo.com";

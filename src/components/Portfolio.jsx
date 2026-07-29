@@ -7,19 +7,12 @@ import clsx from "clsx";
 
 // La structure des projets contient une clé i18n pour le titre
 const PROJECTS = [
+    { key: "afcl", image: "/mockup/afcl-pfl.png", tech: ["Astro", "TypeScript", "React", "Tailwind CSS", "WordPress"], link: "https://africtivistescitizenlab.org/", category: "Web" },
+    { key: "acls", image: "/mockup/acls.png", tech: ["Astro", "TypeScript", "React", "Tailwind CSS", "WordPress"], link: "https://citizenlabsenegal.org/", category: "Web" },
+    { key: "chatbot", image: "/mockup/chatbot-pfl.webp", tech: ["Next.js", "React", "Tailwind CSS"], link: "https://chatbotcitizenlab.vercel.app/", category: "Web" },
     { key: "quran-app", image: "/mockup/quran-app.webp", tech: ["React", "Tailwind CSS", "API Rest", "Mongoose", "MongoDB", "Node.JS", "Express.JS"], link: "https://quran-app-zeta-silk.vercel.app/", category: "Web" },
     { key: "cinetheque", image: "/mockup/cinetheque.webp", tech: ["React", "Tailwind CSS", "Mongoose", "MongoDB", "Node.JS", "Express.JS"], link: "https://cinetheque-lac.vercel.app/", category: "Web" },
     { key: "monvelo", image: "/mockup/monvelo-prfl.webp", tech: ["Next.js", "React", "Tailwind CSS", "Prisma", "Supabase", "Node.JS"], link: "https://monvelo-frontend.vercel.app/", category: "E-Commerce" },
-    { key: "senegal24", image: "/mockup/senegal24.webp", tech: ["Next.js", "React", "Tailwind CSS", "Hygraph", "GraphQL"], link: "https://senegal24.vercel.app/", category: "Web" },
-    { key: "acls", image: "/mockup/acls.png", tech: ["Astro", "TypeScript", "React", "Tailwind CSS", "WordPress"], link: "https://citizenlabsenegal.org/", category: "Web" },
-    { key: "afcl", image: "/mockup/afcl-pfl.png", tech: ["Astro", "TypeScript", "React", "Tailwind CSS", "WordPress"], link: "https://africtivistescitizenlab.org/", category: "Web" },
-    { key: "chatbot", image: "/mockup/chatbot-pfl.webp", tech: ["Next.js", "React", "Tailwind CSS"], link: "https://chatbotcitizenlab.vercel.app/", category: "Web" },
-    { key: "sylvie", image: "/mockup/sylvie.webp", tech: ["Next.js", "React", "Tailwind CSS", "PostgreSQL", "Prisma"], link: "https://sylvie-app.vercel.app/", category: "E-Commerce" },
-    { key: "uptech", image: "/mockup/uptech.webp", tech: ["Next.js", "React", "Tailwind CSS", "PostgreSQL", "Prisma"], link: "https://uptechnologie-corpororation.com/", category: "Web" },
-    { key: "ibag", image: "/mockup/ibag-frame.webp", tech: ["Next.js", "React", "Tailwind CSS", "PostgreSQL", "Prisma"], link: "https://ibag-couture.vercel.app/", category: "E-Commerce" },
-    { key: "djamo", image: "/mockup/djamo.webp", tech: ["Next.js", "React", "TypeScript", "Tailwind CSS"], link: "https://djamo-landing.vercel.app/", category: "Landing" },
-    { key: "ichiraku", image: "/mockup/ichiraku.webp", tech: ["Next.js", "React", "Tailwind CSS"], link: "https://ichiraku-landing.vercel.app/", category: "Landing" },
-    { key: "worldsFever", image: "/mockup/worlds_fever.webp", tech: ["Next.js", "React", "Tailwind CSS"], link: "https://worlds-fever.vercel.app/", category: "Web" },
 ];
 
 const INITIAL_VISIBLE = 6;
